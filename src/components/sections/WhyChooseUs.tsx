@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import {
   Code,
   TrendingUp,
@@ -69,17 +68,16 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
   };
 
   return (
-    <section id="why-us" className="relative py-24 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="why-us" className="relative py-20 sm:py-24 bg-white border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold mb-4 shadow-sm">
-            <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold mb-3">
             <span>{whyUsData?.badgeText || "THE STRATEGIC PARTNER"}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
             {whyUsData?.heading || "Why Work With Us?"}
           </h2>
 
@@ -94,31 +92,27 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
           {pointsList.map((p: any, idx: number) => {
             const Icon = p.icon || iconMap[idx % 3] || ShieldCheck;
             return (
-              <motion.div
+              <div
                 key={p.title || idx}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="rounded-3xl p-6 sm:p-8 bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-white transition-all flex flex-col justify-between shadow-sm hover:shadow-md"
+                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200 hover:border-slate-300 hover:bg-white transition-all flex flex-col justify-between shadow-xs"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center shadow-xs">
-                      <Icon className="w-6 h-6" />
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                      <Icon className="w-5 h-5" />
                     </div>
                     {p.badge && (
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-indigo-700 border border-indigo-200 shadow-xs">
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-white text-indigo-700 border border-indigo-200 shadow-xs">
                         {p.badge}
                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-1.5">
+                  <h3 className="text-xl font-bold text-slate-900 mb-1">
                     {p.title}
                   </h3>
                   {p.subtitle && (
-                    <p className="text-xs font-semibold text-indigo-600 mb-4">
+                    <p className="text-xs font-semibold text-indigo-600 mb-3">
                       {p.subtitle}
                     </p>
                   )}
@@ -126,13 +120,13 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
                     {p.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* Clean Before / After Comparison */}
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 max-w-4xl mx-auto shadow-md">
+        <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-10 max-w-4xl mx-auto shadow-xs">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-slate-900">
               The Difference Is Simple
@@ -145,26 +139,26 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* The Old Way */}
-            <div className="p-6 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-3.5">
-              <div className="text-xs font-bold uppercase tracking-wider text-rose-900 flex items-center gap-2">
+            <div className="p-6 rounded-xl bg-white border border-rose-200 space-y-3 shadow-xs">
+              <div className="text-xs font-bold uppercase tracking-wider text-rose-800 flex items-center gap-2">
                 <XCircle className="w-4 h-4 text-rose-500" />
                 <span>The Traditional Way</span>
               </div>
               {oldWayList.map((item: string, i: number) => (
-                <p key={i} className="text-xs text-rose-800 leading-relaxed font-medium">
+                <p key={i} className="text-xs text-slate-700 leading-relaxed">
                   • {item}
                 </p>
               ))}
             </div>
 
             {/* The Raveliant Way */}
-            <div className="p-6 rounded-2xl bg-blue-50/80 border border-blue-200 space-y-3.5 shadow-sm">
+            <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-200 space-y-3 shadow-xs">
               <div className="text-xs font-bold uppercase tracking-wider text-blue-900 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-blue-600" />
                 <span>The Raveliant Way</span>
               </div>
               {raveliantWayList.map((item: string, i: number) => (
-                <p key={i} className="text-xs text-blue-900 leading-relaxed font-medium">
+                <p key={i} className="text-xs text-slate-800 leading-relaxed font-medium">
                   ✓ {item}
                 </p>
               ))}
@@ -172,13 +166,13 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
 
           </div>
 
-          <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <span className="text-xs text-slate-600 font-medium">
               Want to see what we can do for your business?
             </span>
             <a
               href="#contact"
-              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm shadow-blue-500/20"
+              className="px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-xs"
             >
               <span>Get Your Free Growth Audit</span>
               <ArrowRight className="w-3.5 h-3.5" />

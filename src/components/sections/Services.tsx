@@ -2,14 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   Code2,
   Bot,
   Megaphone,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
   TrendingUp,
 } from "lucide-react";
 
@@ -21,7 +19,7 @@ export function Services({ servicesData }: ServicesProps) {
   const defaultServices = [
     {
       title: "Websites & Web Apps",
-      tagline: "Fast, beautiful sites built to turn visitors into active clients.",
+      tagline: "Fast, high-converting platforms built to turn visitors into active clients.",
       image: "/images/service_web.jpg",
       description:
         "If your website is slow, outdated, or confusing, visitors leave before contacting you. We build fast, modern websites that look clean on phones and make it super easy for people to reach out or book a call.",
@@ -70,17 +68,16 @@ export function Services({ servicesData }: ServicesProps) {
   ];
 
   return (
-    <section id="services" className="relative py-24 sm:py-28 bg-white border-y border-slate-200/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="services" className="relative py-20 sm:py-24 bg-white border-y border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-3">
             <span>WHAT WE DO</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
             Everything Your Business Needs To Grow Online
           </h2>
 
@@ -95,40 +92,36 @@ export function Services({ servicesData }: ServicesProps) {
           {(servicesData && servicesData.length > 0 ? servicesData : defaultServices).map((srv, idx) => {
             const Icon = srv.icon || (idx === 0 ? Code2 : idx === 1 ? Bot : Megaphone);
             return (
-              <motion.div
+              <div
                 key={srv.title}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="rounded-3xl p-6 sm:p-7 bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-white transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-xl hover:shadow-blue-500/5"
+                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-200 flex flex-col justify-between shadow-xs hover:shadow-md"
               >
                 <div>
                   {/* Top Bar with Icon & Badge */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center shadow-xs">
-                      <Icon className="w-6 h-6" />
+                    <div className="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200 shadow-xs">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-white text-slate-700 border border-slate-200 shadow-xs">
                       {srv.badge}
                     </span>
                   </div>
 
                   {/* Visual Image Preview */}
-                  <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-slate-200 mb-6 bg-slate-100">
+                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 mb-5 bg-slate-100">
                     <Image
                       src={srv.image}
                       alt={srv.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover"
                     />
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 mb-1.5">
                     {srv.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm font-semibold text-blue-600 mb-4">
+                  <p className="text-xs sm:text-sm font-semibold text-blue-600 mb-3">
                     {srv.tagline}
                   </p>
 
@@ -136,7 +129,7 @@ export function Services({ servicesData }: ServicesProps) {
                     {srv.description}
                   </p>
 
-                  <div className="space-y-3 mb-8">
+                  <div className="space-y-2.5 mb-8">
                     {srv.features?.map((feat: string, fIdx: number) => (
                       <div key={feat || fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
                         <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
@@ -146,20 +139,20 @@ export function Services({ servicesData }: ServicesProps) {
                   </div>
                 </div>
 
-                <div className="pt-5 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/80 flex items-center gap-1.5">
+                <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 flex items-center gap-1.5">
                     <TrendingUp className="w-3.5 h-3.5 shrink-0" />
                     <span>{srv.impact}</span>
                   </div>
                   <a
                     href="#contact"
-                    className="text-xs font-bold text-slate-700 hover:text-blue-600 flex items-center gap-1 group-hover:translate-x-1 transition-all self-start sm:self-auto"
+                    className="text-xs font-bold text-slate-700 hover:text-blue-600 flex items-center gap-1 transition-colors self-start sm:self-auto"
                   >
                     <span>Get Started</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

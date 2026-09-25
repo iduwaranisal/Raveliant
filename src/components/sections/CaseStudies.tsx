@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   TrendingUp,
   ArrowRight,
@@ -71,17 +70,16 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
   const currentStudy = studies[activeTab] || studies[0] || defaultStudies[0];
 
   return (
-    <section id="case-studies" className="relative py-24 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="case-studies" className="relative py-20 sm:py-24 bg-white border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-4 shadow-sm">
-            <TrendingUp className="w-3.5 h-3.5 text-blue-600" />
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-3">
             <span>REAL CLIENT RESULTS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
             Client Success Stories
           </h2>
 
@@ -92,14 +90,14 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
         </div>
 
         {/* Tab Selector */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {studies.map((item, idx) => (
             <button
               key={item.client ? `${item.client}-${idx}` : idx}
               onClick={() => setActiveTab(idx)}
-              className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all border ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors border ${
                 activeTab === idx
-                  ? "bg-blue-600 text-white border-blue-600 shadow-sm font-bold"
+                  ? "bg-blue-600 text-white border-blue-600 shadow-xs"
                   : "bg-slate-100 text-slate-600 border-slate-200 hover:text-slate-900 hover:bg-slate-200"
               }`}
             >
@@ -108,19 +106,13 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
           ))}
         </div>
 
-        {/* Selected Case Study Card */}
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.25 }}
-          className="rounded-3xl border border-slate-200 bg-slate-50/70 p-6 sm:p-10 max-w-5xl mx-auto shadow-md"
-        >
+        {/* Selected Case Study Card - instant, no motion lag */}
+        <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-10 max-w-5xl mx-auto shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left Column: Visual Mockup Image */}
             <div className="lg:col-span-6 space-y-4">
-              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-sm">
+              <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs">
                 <Image
                   src={currentStudy.image || "/images/case_aurapay.svg"}
                   alt={currentStudy.client || "Case Study"}
@@ -135,9 +127,9 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
                   {currentStudy.metrics.map((m: any, idx: number) => (
                     <div
                       key={m.label || idx}
-                      className="p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200 text-center shadow-xs"
+                      className="p-3 rounded-lg bg-white border border-slate-200 text-center shadow-xs"
                     >
-                      <div className="text-xs sm:text-base font-extrabold text-blue-600">
+                      <div className="text-sm sm:text-base font-extrabold text-blue-600">
                         {m.value}
                       </div>
                       <div className="text-[10px] text-slate-500 font-semibold mt-0.5 line-clamp-1">
@@ -165,7 +157,7 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
               </p>
 
               {/* Quote */}
-              <div className="p-4 rounded-2xl bg-white border border-slate-200 flex items-start gap-3 shadow-xs">
+              <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-start gap-3 shadow-xs">
                 <Quote className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
                 <div>
                   <p className="text-xs sm:text-sm italic text-slate-700">
@@ -180,16 +172,16 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
               <div className="pt-2 flex justify-start">
                 <a
                   href="#contact"
-                  className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 group"
+                  className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
                 >
                   <span>Want results like this? Request your free review</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
 
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </section>

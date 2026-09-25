@@ -342,7 +342,7 @@ export function AdminDashboard({
   }
 
   return (
-    <div className="min-h-screen bg-[#040816] text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
       {/* Toast Notification */}
       <AnimatePresence>
         {notification && (
@@ -353,8 +353,8 @@ export function AdminDashboard({
             transition={{ duration: 0.25 }}
             className={`fixed top-4 left-4 right-4 sm:left-auto sm:right-6 sm:top-6 sm:max-w-md z-50 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl border shadow-2xl flex items-center gap-3 text-xs sm:text-sm font-semibold backdrop-blur-xl ${
               notification.type === "success"
-                ? "bg-[#091f1c]/95 border-emerald-500/40 text-emerald-200 shadow-emerald-950/40"
-                : "bg-[#250d18]/95 border-red-500/40 text-red-200 shadow-red-950/40"
+                ? "bg-white border-emerald-300 text-slate-900 shadow-xl"
+                : "bg-white border-red-300 text-slate-900 shadow-xl"
             }`}
           >
             {notification.type === "success" ? (
@@ -363,15 +363,15 @@ export function AdminDashboard({
               <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
             )}
             <div className="flex flex-col pr-2">
-              <span className="font-bold text-white">
+              <span className="font-bold text-slate-900">
                 {notification.type === "success" ? "Success" : "Notice"}
               </span>
-              <span className="text-xs text-slate-300 font-normal">{notification.message}</span>
+              <span className="text-xs text-slate-600 font-normal">{notification.message}</span>
             </div>
             <button
               type="button"
               onClick={() => setNotification(null)}
-              className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors ml-auto"
+              className="text-slate-500 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors ml-auto"
             >
               <X className="w-4 h-4" />
             </button>
@@ -380,15 +380,15 @@ export function AdminDashboard({
       </AnimatePresence>
 
       {/* Top Admin Header */}
-      <header className="bg-[#080f28]/90 border-b border-white/10 sticky top-0 z-40 backdrop-blur-xl">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           
           <div className="flex items-center gap-2 sm:gap-3">
-            <Link href="/" className="flex items-center gap-2 text-white font-bold tracking-wider text-sm sm:text-base">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0" />
+            <Link href="/" className="flex items-center gap-2 text-slate-900 font-bold tracking-wider text-sm sm:text-base">
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
               <span>RAVELIANT <span className="hidden sm:inline">CONTROL PANEL</span></span>
             </Link>
-            <span className="hidden md:inline-block text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">
+            <span className="hidden md:inline-block text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold font-mono">
               Secure Session
             </span>
           </div>
@@ -397,7 +397,7 @@ export function AdminDashboard({
             <Link
               href="/"
               target="_blank"
-              className="px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-slate-300 flex items-center gap-1.5"
+              className="px-2.5 sm:px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-700 flex items-center gap-1.5"
             >
               <span className="hidden sm:inline">View Live Website</span>
               <span className="sm:hidden">Website</span>
@@ -406,7 +406,7 @@ export function AdminDashboard({
 
             <button
               onClick={handleLogout}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10"
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
@@ -417,12 +417,12 @@ export function AdminDashboard({
       </header>
 
       {/* Admin Navigation Tabs */}
-      <div className="bg-[#060c22] border-b border-white/5 px-4 sm:px-8 py-2 overflow-x-auto">
+      <div className="bg-white border-b border-slate-200 px-4 sm:px-8 py-2 overflow-x-auto">
         <div className="max-w-7xl mx-auto flex items-center gap-2">
           <button
             onClick={() => setActiveTab("inbox")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "inbox" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "inbox" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <Inbox className="w-4 h-4" />
@@ -432,7 +432,7 @@ export function AdminDashboard({
           <button
             onClick={() => setActiveTab("portfolio")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "portfolio" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "portfolio" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <FolderGit2 className="w-4 h-4" />
@@ -442,7 +442,7 @@ export function AdminDashboard({
           <button
             onClick={() => setActiveTab("hero")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "hero" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "hero" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <Sparkles className="w-4 h-4" />
@@ -452,7 +452,7 @@ export function AdminDashboard({
           <button
             onClick={() => setActiveTab("services")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "services" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "services" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -462,7 +462,7 @@ export function AdminDashboard({
           <button
             onClick={() => setActiveTab("whyUs")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "whyUs" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "whyUs" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <span>Why Choose Us</span>
@@ -471,7 +471,7 @@ export function AdminDashboard({
           <button
             onClick={() => setActiveTab("process")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "process" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "process" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <span>4-Step Process</span>
@@ -480,7 +480,7 @@ export function AdminDashboard({
           <button
             onClick={() => setActiveTab("caseStudies")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "caseStudies" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "caseStudies" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <span>Case Studies</span>
@@ -489,7 +489,7 @@ export function AdminDashboard({
           <button
             onClick={() => setActiveTab("settings")}
             className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
-              activeTab === "settings" ? "bg-cyan-500 text-slate-950 shadow-md" : "text-slate-400 hover:text-white"
+              activeTab === "settings" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
             }`}
           >
             <Settings className="w-4 h-4" />
@@ -506,23 +506,23 @@ export function AdminDashboard({
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-white">Client Inquiries &amp; Messages</h2>
-                <p className="text-xs text-slate-400 mt-1">
+                <h2 className="text-2xl font-bold text-slate-900">Client Inquiries &amp; Messages</h2>
+                <p className="text-xs text-slate-500 mt-1">
                   Review customer submissions and consultation requests in real time
                 </p>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-400 font-mono">
+                <span className="text-xs text-slate-500 font-mono">
                   Total: {messages.length} inquiries
                 </span>
               </div>
             </div>
 
             {messages.length === 0 ? (
-              <div className="p-12 text-center rounded-3xl bg-[#080f28]/60 border border-white/10 text-slate-400">
+              <div className="p-12 text-center rounded-3xl bg-white border border-slate-200 shadow-xs text-slate-500">
                 <Inbox className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-                <p className="text-base font-semibold text-white">No inquiries yet</p>
+                <p className="text-base font-semibold text-slate-900">No inquiries yet</p>
                 <p className="text-xs mt-1">When users submit the growth audit form, their messages will appear here.</p>
               </div>
             ) : (
@@ -540,31 +540,31 @@ export function AdminDashboard({
                       key={msg._id}
                       className={`p-6 rounded-3xl border transition-all ${
                         msg.status === "unread"
-                          ? "bg-[#09153a]/90 border-cyan-500/40 shadow-lg shadow-cyan-500/10"
-                          : "bg-[#070e24]/70 border-white/10"
+                          ? "bg-blue-50/40 border-blue-300 shadow-xs"
+                          : "bg-white border-slate-200 shadow-xs"
                       }`}
                     >
-                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/10">
+                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-200">
                         <div>
                           <div className="flex items-center gap-2.5">
-                            <span className="text-lg font-bold text-white">{msg.name}</span>
+                            <span className="text-lg font-bold text-slate-900">{msg.name}</span>
                             <span
                               className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${
                                 msg.status === "unread"
-                                  ? "bg-cyan-500 text-slate-950"
+                                  ? "bg-blue-600 text-white font-semibold"
                                   : msg.status === "replied"
-                                  ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                                  : "bg-white/5 text-slate-400"
+                                  ? "bg-emerald-500/20 text-emerald-700 border border-emerald-500/30"
+                                  : "bg-white/5 text-slate-500"
                               }`}
                             >
                               {msg.status}
                             </span>
                           </div>
 
-                          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300 mt-1.5">
-                            <span className="text-cyan-400 font-semibold">{msg.email}</span>
+                          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 mt-1.5">
+                            <span className="text-blue-600 font-semibold">{msg.email}</span>
                             <span className="text-slate-600">•</span>
-                            <span className="text-emerald-300 font-semibold inline-flex items-center gap-1">
+                            <span className="text-emerald-700 font-semibold inline-flex items-center gap-1">
                               <Phone className="w-3 h-3 text-emerald-400" />
                               {msg.phone || "No phone"}
                             </span>
@@ -580,7 +580,7 @@ export function AdminDashboard({
                             <span className="text-slate-600">•</span>
                             <span className="text-white underline">{msg.businessUrl}</span>
                             <span className="text-slate-600">•</span>
-                            <span className="text-slate-400">
+                            <span className="text-slate-500">
                               {msg.createdAt ? new Date(msg.createdAt).toLocaleString() : "Recent"}
                             </span>
                           </div>
@@ -591,9 +591,9 @@ export function AdminDashboard({
                           {msg.phone && (
                             <a
                               href={`tel:${msg.phone.replace(/\s+/g, "")}`}
-                              className="px-3 py-1.5 rounded-xl bg-white/[0.05] border border-white/10 text-slate-200 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                              className="px-3 py-1.5 rounded-xl bg-white/[0.05] border border-slate-200 text-slate-200 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
                             >
-                              <Phone className="w-3.5 h-3.5 text-cyan-400" />
+                              <Phone className="w-3.5 h-3.5 text-blue-600" />
                               <span>Call</span>
                             </a>
                           )}
@@ -602,7 +602,7 @@ export function AdminDashboard({
                             href={waReplyUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-3 py-1.5 rounded-xl bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                            className="px-3 py-1.5 rounded-xl bg-emerald-950/60 border border-emerald-500/30 text-emerald-700 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
                           >
                             <MessageCircle className="w-3.5 h-3.5" />
                             <span>WhatsApp</span>
@@ -610,7 +610,7 @@ export function AdminDashboard({
 
                           <a
                             href={mailtoUrl}
-                            className="px-3 py-1.5 rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                            className="px-3 py-1.5 rounded-xl bg-blue-50/60 border border-blue-200 text-blue-700 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
                           >
                             <Mail className="w-3.5 h-3.5" />
                             <span>Email</span>
@@ -619,7 +619,7 @@ export function AdminDashboard({
                           <select
                             value={msg.status}
                             onChange={(e) => handleStatusChange(msg._id, e.target.value as any)}
-                            className="bg-[#040816] border border-white/15 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none"
+                            className="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-blue-500"
                           >
                             <option value="unread">Unread</option>
                             <option value="read">Mark as Read</option>
@@ -629,7 +629,7 @@ export function AdminDashboard({
 
                           <button
                             onClick={() => handleDeleteMessage(msg._id)}
-                            className="p-2 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                            className="p-2 rounded-xl text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
                             title="Delete"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -638,19 +638,19 @@ export function AdminDashboard({
                       </div>
 
                       <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-                        <div className="p-3 rounded-2xl bg-black/40 border border-white/5">
-                          <span className="text-slate-400 font-mono uppercase text-[10px] block mb-1">
+                        <div className="p-3 rounded-2xl bg-black/40 border border-slate-100">
+                          <span className="text-slate-500 font-mono uppercase text-[10px] block mb-1">
                             Primary Goal
                           </span>
                           <span className="font-semibold text-white">{msg.primaryGoal}</span>
                         </div>
 
-                        <div className="p-3 rounded-2xl bg-black/40 border border-white/5">
-                          <span className="text-slate-400 font-mono uppercase text-[10px] block mb-1">
+                        <div className="p-3 rounded-2xl bg-black/40 border border-slate-100">
+                          <span className="text-slate-500 font-mono uppercase text-[10px] block mb-1">
                             Contact Number
                           </span>
                           <span className="font-semibold text-white">{msg.phone || "—"}</span>
-                          <span className="text-slate-400 font-mono uppercase text-[10px] block mt-2 mb-1">
+                          <span className="text-slate-500 font-mono uppercase text-[10px] block mt-2 mb-1">
                             WhatsApp
                           </span>
                           <span className="font-semibold text-emerald-400">
@@ -658,8 +658,8 @@ export function AdminDashboard({
                           </span>
                         </div>
 
-                        <div className="md:col-span-2 p-3 rounded-2xl bg-black/40 border border-white/5">
-                          <span className="text-slate-400 font-mono uppercase text-[10px] block mb-1">
+                        <div className="md:col-span-2 p-3 rounded-2xl bg-black/40 border border-slate-100">
+                          <span className="text-slate-500 font-mono uppercase text-[10px] block mb-1">
                             Client Message / Notes
                           </span>
                           <p className="text-slate-200 leading-relaxed">
@@ -680,8 +680,8 @@ export function AdminDashboard({
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-white">Portfolio Projects Manager</h2>
-                <p className="text-xs text-slate-400 mt-1">
+                <h2 className="text-2xl font-bold text-slate-900">Portfolio Projects Manager</h2>
+                <p className="text-xs text-slate-500 mt-1">
                   Add, edit, or remove showcase projects displayed in the Portfolio section
                 </p>
               </div>
@@ -701,7 +701,7 @@ export function AdminDashboard({
                   });
                   setIsEditingProject(true);
                 }}
-                className="px-4 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-md shadow-cyan-400/20"
+                className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs flex items-center gap-2 shadow-md shadow-blue-500/10"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add New Project</span>
@@ -710,14 +710,14 @@ export function AdminDashboard({
 
             {/* Project Edit/Create Modal */}
             {isEditingProject && (
-              <div className="p-6 sm:p-8 rounded-3xl bg-[#080f28] border border-cyan-500/40 shadow-2xl space-y-5">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <h3 className="text-lg font-bold text-white">
+              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-xl space-y-5">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+                  <h3 className="text-lg font-bold text-slate-900">
                     {currentProject._id ? "Edit Portfolio Project" : "Add New Project"}
                   </h3>
                   <button
                     onClick={() => setIsEditingProject(false)}
-                    className="text-xs text-slate-400 hover:text-white"
+                    className="text-xs text-slate-500 hover:text-white"
                   >
                     Cancel
                   </button>
@@ -726,7 +726,7 @@ export function AdminDashboard({
                 <form onSubmit={handleSaveProject} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Project Title *
                       </label>
                       <input
@@ -735,12 +735,12 @@ export function AdminDashboard({
                         value={currentProject.title}
                         onChange={(e) => setCurrentProject({ ...currentProject, title: e.target.value })}
                         placeholder="e.g. Lumina Mobile Storefront"
-                        className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Client / Brand Name *
                       </label>
                       <input
@@ -749,20 +749,20 @@ export function AdminDashboard({
                         value={currentProject.client}
                         onChange={(e) => setCurrentProject({ ...currentProject, client: e.target.value })}
                         placeholder="e.g. Lumina Goods"
-                        className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Category / Goal *
                       </label>
                       <select
                         value={currentProject.category}
                         onChange={(e) => setCurrentProject({ ...currentProject, category: e.target.value })}
-                        className="w-full bg-[#040816] border border-white/15 rounded-xl px-3 py-2.5 text-xs text-white"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       >
                         <option value="All-in-One Digital Growth">All-in-One Digital Growth</option>
                         <option value="Get More Customer Calls & Inquiries">Get More Customer Calls & Inquiries</option>
@@ -773,7 +773,7 @@ export function AdminDashboard({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Highlight Badge
                       </label>
                       <input
@@ -781,12 +781,12 @@ export function AdminDashboard({
                         value={currentProject.highlight}
                         onChange={(e) => setCurrentProject({ ...currentProject, highlight: e.target.value })}
                         placeholder="e.g. 70 Hours Saved Weekly"
-                        className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">
                         Live Preview URL (Optional)
                       </label>
                       <input
@@ -794,13 +794,13 @@ export function AdminDashboard({
                         value={currentProject.liveUrl}
                         onChange={(e) => setCurrentProject({ ...currentProject, liveUrl: e.target.value })}
                         placeholder="https://client-demo.com"
-                        className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Project Description *
                     </label>
                     <textarea
@@ -809,12 +809,12 @@ export function AdminDashboard({
                       value={currentProject.description}
                       onChange={(e) => setCurrentProject({ ...currentProject, description: e.target.value })}
                       placeholder="Brief overview of what was built and the result..."
-                      className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Tags (Comma separated)
                     </label>
                     <input
@@ -822,13 +822,13 @@ export function AdminDashboard({
                       value={Array.isArray(currentProject.tags) ? currentProject.tags.join(", ") : currentProject.tags}
                       onChange={(e) => setCurrentProject({ ...currentProject, tags: e.target.value })}
                       placeholder="Next.js, Mobile UX, AI Automation"
-                      className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     />
                   </div>
 
                   {/* Image Upload / URL */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Project Cover Image URL
                     </label>
                     <div className="flex items-center gap-3">
@@ -836,10 +836,10 @@ export function AdminDashboard({
                         type="text"
                         value={currentProject.image}
                         onChange={(e) => setCurrentProject({ ...currentProject, image: e.target.value })}
-                        className="flex-1 bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                        className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
 
-                      <label className="px-4 py-2 rounded-xl bg-cyan-950 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
+                      <label className="px-4 py-2 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 hover:text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
                         <Upload className="w-3.5 h-3.5" />
                         <span>{uploadingImage ? "Uploading..." : "Upload Image"}</span>
                         <input
@@ -854,18 +854,18 @@ export function AdminDashboard({
                     </div>
                   </div>
 
-                  <div className="flex justify-end gap-3 pt-3 border-t border-white/10">
+                  <div className="flex justify-end gap-3 pt-3 border-t border-slate-200">
                     <button
                       type="button"
                       onClick={() => setIsEditingProject(false)}
-                      className="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white"
+                      className="px-4 py-2 rounded-xl text-xs text-slate-500 hover:text-white"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={isSaving}
-                      className="px-6 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs"
+                      className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs"
                     >
                       {isSaving ? "Saving..." : "Save Project"}
                     </button>
@@ -879,33 +879,33 @@ export function AdminDashboard({
               {projects.map((proj) => (
                 <div
                   key={proj._id || proj.title}
-                  className="rounded-3xl p-5 bg-[#080f28]/70 border border-white/10 flex flex-col justify-between"
+                  className="rounded-2xl p-5 bg-white border border-slate-200 shadow-xs flex flex-col justify-between"
                 >
                   <div>
-                    <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 mb-4 bg-black">
+                    <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-slate-200 mb-4 bg-black">
                       <Image
                         src={proj.image || "/images/service_web.jpg"}
                         alt={proj.title}
                         fill
                         className="object-cover"
                       />
-                      <div className="absolute top-2 left-2 bg-black/80 px-2 py-0.5 rounded text-[10px] font-bold text-cyan-300">
+                      <div className="absolute top-2 left-2 bg-black/80 px-2 py-0.5 rounded text-[10px] font-bold text-blue-700">
                         {proj.category}
                       </div>
                     </div>
 
-                    <div className="text-[11px] text-slate-400 uppercase tracking-wider">{proj.client}</div>
-                    <h4 className="text-base font-bold text-white mt-0.5">{proj.title}</h4>
-                    <p className="text-xs text-slate-300 mt-1 line-clamp-2">{proj.description}</p>
+                    <div className="text-[11px] text-slate-500 uppercase tracking-wider">{proj.client}</div>
+                    <h4 className="text-base font-bold text-slate-900 mt-0.5">{proj.title}</h4>
+                    <p className="text-xs text-slate-600 mt-1 line-clamp-2">{proj.description}</p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+                  <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
                     <button
                       onClick={() => {
                         setCurrentProject(proj);
                         setIsEditingProject(true);
                       }}
-                      className="text-xs text-cyan-400 hover:text-white flex items-center gap-1"
+                      className="text-xs text-blue-600 hover:text-white flex items-center gap-1"
                     >
                       <Edit className="w-3.5 h-3.5" />
                       <span>Edit</span>
@@ -927,16 +927,16 @@ export function AdminDashboard({
 
         {/* ===================== TAB 3: HERO CMS ===================== */}
         {activeTab === "hero" && (
-          <div className="rounded-3xl p-6 sm:p-8 bg-[#080f28]/80 border border-white/10 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-xs space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Hero Section Content</h2>
-                <p className="text-xs text-slate-400 mt-1">Customize the primary headline, subheadline, and CTAs</p>
+                <h2 className="text-xl font-bold text-slate-900">Hero Section Content</h2>
+                <p className="text-xs text-slate-500 mt-1">Customize the primary headline, subheadline, and CTAs</p>
               </div>
               <button
                 onClick={handleSaveHero}
                 disabled={isSaving}
-                className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs flex items-center gap-1.5"
               >
                 <Save className="w-4 h-4" />
                 <span>{isSaving ? "Saving..." : "Save Hero"}</span>
@@ -945,69 +945,69 @@ export function AdminDashboard({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Top Badge Text</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Top Badge Text</label>
                 <input
                   type="text"
                   value={content.hero?.badgeText || ""}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, badgeText: e.target.value } })}
-                  className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Main Headline Line 1</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Main Headline Line 1</label>
                 <input
                   type="text"
                   value={content.hero?.headlineMain || ""}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, headlineMain: e.target.value } })}
-                  className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Gradient Headline Line 2</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Gradient Headline Line 2</label>
                 <input
                   type="text"
                   value={content.hero?.headlineGradient || ""}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, headlineGradient: e.target.value } })}
-                  className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Primary CTA Button</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Primary CTA Button</label>
                 <input
                   type="text"
                   value={content.hero?.primaryCta || ""}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, primaryCta: e.target.value } })}
-                  className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Subheadline Description</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Subheadline Description</label>
               <textarea
                 rows={3}
                 value={content.hero?.subheadline || ""}
                 onChange={(e) => setContent({ ...content, hero: { ...content.hero, subheadline: e.target.value } })}
-                className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white leading-relaxed"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 leading-relaxed"
               />
             </div>
 
             {/* Showcase Image Upload */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Hero Showcase Image</label>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Hero Showcase Image</label>
               <div className="flex items-center gap-3">
                 <input
                   type="text"
                   value={content.hero?.showcaseImage || ""}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, showcaseImage: e.target.value } })}
-                  className="flex-1 bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                  className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
-                <label className="px-4 py-2 rounded-xl bg-cyan-950 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
+                <label className="px-4 py-2 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 hover:text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
                   <Upload className="w-3.5 h-3.5" />
                   <span>Upload Image</span>
                   <input
@@ -1028,16 +1028,16 @@ export function AdminDashboard({
 
         {/* ===================== TAB 4: SERVICES CMS ===================== */}
         {activeTab === "services" && (
-          <div className="rounded-3xl p-6 sm:p-8 bg-[#080f28]/80 border border-white/10 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-xs space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Services Content (3 Pillars)</h2>
-                <p className="text-xs text-slate-400 mt-1">Edit titles, descriptions, and features for each service</p>
+                <h2 className="text-xl font-bold text-slate-900">Services Content (3 Pillars)</h2>
+                <p className="text-xs text-slate-500 mt-1">Edit titles, descriptions, and features for each service</p>
               </div>
               <button
                 onClick={handleSaveServices}
                 disabled={isSaving}
-                className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs flex items-center gap-1.5"
               >
                 <Save className="w-4 h-4" />
                 <span>{isSaving ? "Saving..." : "Save Services"}</span>
@@ -1046,16 +1046,16 @@ export function AdminDashboard({
 
             <div className="space-y-6">
               {content.services?.map((srv: any, idx: number) => (
-                <div key={idx} className="p-5 rounded-2xl bg-[#040816]/70 border border-white/10 space-y-3">
+                <div key={idx} className="p-5 rounded-xl bg-slate-50/80 border border-slate-200 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
                       Service {idx + 1}: {srv.badge}
                     </span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[11px] text-slate-400 mb-1">Title</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Title</label>
                       <input
                         type="text"
                         value={srv.title}
@@ -1064,12 +1064,12 @@ export function AdminDashboard({
                           updated[idx].title = e.target.value;
                           setContent({ ...content, services: updated });
                         }}
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] text-slate-400 mb-1">Tagline</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Tagline</label>
                       <input
                         type="text"
                         value={srv.tagline}
@@ -1078,13 +1078,13 @@ export function AdminDashboard({
                           updated[idx].tagline = e.target.value;
                           setContent({ ...content, services: updated });
                         }}
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-[11px] text-slate-400 mb-1">Description</label>
+                    <label className="block text-[11px] text-slate-500 mb-1">Description</label>
                     <textarea
                       rows={2}
                       value={srv.description}
@@ -1093,13 +1093,13 @@ export function AdminDashboard({
                         updated[idx].description = e.target.value;
                         setContent({ ...content, services: updated });
                       }}
-                      className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[11px] text-slate-400 mb-1">Image URL</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Image URL</label>
                       <input
                         type="text"
                         value={srv.image}
@@ -1108,12 +1108,12 @@ export function AdminDashboard({
                           updated[idx].image = e.target.value;
                           setContent({ ...content, services: updated });
                         }}
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] text-slate-400 mb-1">Impact Result Pill</label>
+                      <label className="block text-[11px] text-slate-500 mb-1">Impact Result Pill</label>
                       <input
                         type="text"
                         value={srv.impact}
@@ -1122,7 +1122,7 @@ export function AdminDashboard({
                           updated[idx].impact = e.target.value;
                           setContent({ ...content, services: updated });
                         }}
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
                       />
                     </div>
                   </div>
@@ -1134,16 +1134,16 @@ export function AdminDashboard({
 
         {/* ===================== TAB 5: WHY US CMS ===================== */}
         {activeTab === "whyUs" && (
-          <div className="rounded-3xl p-6 sm:p-8 bg-[#080f28]/80 border border-white/10 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-xs space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Why Work With Us Section</h2>
-                <p className="text-xs text-slate-400 mt-1">Edit the 3 strategic points and comparison list</p>
+                <h2 className="text-xl font-bold text-slate-900">Why Work With Us Section</h2>
+                <p className="text-xs text-slate-500 mt-1">Edit the 3 strategic points and comparison list</p>
               </div>
               <button
                 onClick={handleSaveWhyUs}
                 disabled={isSaving}
-                className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs flex items-center gap-1.5"
               >
                 <Save className="w-4 h-4" />
                 <span>{isSaving ? "Saving..." : "Save Why Us"}</span>
@@ -1152,30 +1152,30 @@ export function AdminDashboard({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Section Heading</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Section Heading</label>
                 <input
                   type="text"
                   value={content.whyUs?.heading || ""}
                   onChange={(e) => setContent({ ...content, whyUs: { ...content.whyUs, heading: e.target.value } })}
-                  className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Subheading</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Subheading</label>
                 <input
                   type="text"
                   value={content.whyUs?.subheading || ""}
                   onChange={(e) => setContent({ ...content, whyUs: { ...content.whyUs, subheading: e.target.value } })}
-                  className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
             </div>
 
-            <div className="space-y-4 pt-4 border-t border-white/10">
-              <h3 className="text-sm font-bold text-cyan-300">The 3 Value Points</h3>
+            <div className="space-y-4 pt-4 border-t border-slate-200">
+              <h3 className="text-sm font-bold text-blue-700">The 3 Value Points</h3>
               {content.whyUs?.points?.map((p: any, idx: number) => (
-                <div key={idx} className="p-4 rounded-2xl bg-[#040816] border border-white/10 space-y-2">
+                <div key={idx} className="p-4 rounded-xl bg-slate-50/80 border border-slate-200 space-y-2">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
@@ -1185,7 +1185,7 @@ export function AdminDashboard({
                         updated[idx].title = e.target.value;
                         setContent({ ...content, whyUs: { ...content.whyUs, points: updated } });
                       }}
-                      className="bg-[#080f28] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white font-bold"
+                      className="bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-blue-500 font-bold"
                     />
                     <input
                       type="text"
@@ -1195,7 +1195,7 @@ export function AdminDashboard({
                         updated[idx].subtitle = e.target.value;
                         setContent({ ...content, whyUs: { ...content.whyUs, points: updated } });
                       }}
-                      className="bg-[#080f28] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-cyan-400"
+                      className="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-blue-600"
                     />
                   </div>
                   <textarea
@@ -1206,7 +1206,7 @@ export function AdminDashboard({
                       updated[idx].description = e.target.value;
                       setContent({ ...content, whyUs: { ...content.whyUs, points: updated } });
                     }}
-                    className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-300"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-700 focus:outline-none focus:border-blue-500"
                   />
                 </div>
               ))}
@@ -1216,16 +1216,16 @@ export function AdminDashboard({
 
         {/* ===================== TAB 6: PROCESS CMS ===================== */}
         {activeTab === "process" && (
-          <div className="rounded-3xl p-6 sm:p-8 bg-[#080f28]/80 border border-white/10 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-xs space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Our 4-Step Process Content</h2>
-                <p className="text-xs text-slate-400 mt-1">Edit step titles, descriptions, and deliverables</p>
+                <h2 className="text-xl font-bold text-slate-900">Our 4-Step Process Content</h2>
+                <p className="text-xs text-slate-500 mt-1">Edit step titles, descriptions, and deliverables</p>
               </div>
               <button
                 onClick={handleSaveProcess}
                 disabled={isSaving}
-                className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs flex items-center gap-1.5"
               >
                 <Save className="w-4 h-4" />
                 <span>{isSaving ? "Saving..." : "Save Process"}</span>
@@ -1234,9 +1234,9 @@ export function AdminDashboard({
 
             <div className="space-y-4">
               {content.process?.map((st: any, idx: number) => (
-                <div key={idx} className="p-4 rounded-2xl bg-[#040816] border border-white/10 space-y-3">
+                <div key={idx} className="p-4 rounded-xl bg-slate-50/80 border border-slate-200 space-y-3">
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-mono font-bold text-cyan-400">Step {st.number}</span>
+                    <span className="text-sm font-mono font-bold text-blue-600">Step {st.number}</span>
                     <input
                       type="text"
                       value={st.title}
@@ -1245,7 +1245,7 @@ export function AdminDashboard({
                         updated[idx].title = e.target.value;
                         setContent({ ...content, process: updated });
                       }}
-                      className="flex-1 bg-[#080f28] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white font-bold"
+                      className="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-blue-500 font-bold"
                     />
                   </div>
 
@@ -1257,11 +1257,11 @@ export function AdminDashboard({
                       updated[idx].description = e.target.value;
                       setContent({ ...content, process: updated });
                     }}
-                    className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-slate-300"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-700 focus:outline-none focus:border-blue-500"
                   />
 
                   <div>
-                    <label className="block text-[10px] text-slate-400 mb-1">Deliverable Pill</label>
+                    <label className="block text-[10px] text-slate-500 mb-1">Deliverable Pill</label>
                     <input
                       type="text"
                       value={st.deliverable}
@@ -1270,7 +1270,7 @@ export function AdminDashboard({
                         updated[idx].deliverable = e.target.value;
                         setContent({ ...content, process: updated });
                       }}
-                      className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-emerald-300"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-emerald-700"
                     />
                   </div>
                 </div>
@@ -1281,11 +1281,11 @@ export function AdminDashboard({
 
         {/* ===================== TAB 7: CASE STUDIES CMS ===================== */}
         {activeTab === "caseStudies" && (
-          <div className="rounded-3xl p-6 sm:p-8 bg-[#080f28]/80 border border-white/10 space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-xs space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Client Case Studies</h2>
-                <p className="text-xs text-slate-400 mt-1">
+                <h2 className="text-xl font-bold text-slate-900">Client Case Studies</h2>
+                <p className="text-xs text-slate-500 mt-1">
                   Add, edit, or remove client success stories, key factual metrics, and testimonials
                 </p>
               </div>
@@ -1294,16 +1294,16 @@ export function AdminDashboard({
                 <button
                   type="button"
                   onClick={handleAddCaseStudy}
-                  className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white text-xs font-semibold flex items-center gap-1.5 transition-all"
+                  className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-slate-200 text-white text-xs font-semibold flex items-center gap-1.5 transition-all"
                 >
-                  <Plus className="w-4 h-4 text-cyan-400" />
+                  <Plus className="w-4 h-4 text-blue-600" />
                   <span>Add Case Study</span>
                 </button>
 
                 <button
                   onClick={handleSaveCaseStudies}
                   disabled={isSaving}
-                  className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-md shadow-cyan-400/20"
+                  className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs flex items-center gap-1.5 shadow-md shadow-blue-500/10"
                 >
                   <Save className="w-4 h-4" />
                   <span>{isSaving ? "Saving..." : "Save Case Studies"}</span>
@@ -1313,11 +1313,11 @@ export function AdminDashboard({
 
             <div className="space-y-6">
               {content.caseStudies?.map((cs: any, idx: number) => (
-                <div key={idx} className="p-6 rounded-2xl bg-[#040816] border border-white/10 space-y-4 relative group">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <div key={idx} className="p-6 rounded-xl bg-slate-50/80 border border-slate-200 space-y-4 relative group">
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                      <span className="text-sm font-bold text-white">
+                      <span className="w-2 h-2 rounded-full bg-blue-600" />
+                      <span className="text-sm font-bold text-slate-900">
                         Case Study #{idx + 1}: {cs.client || "Untitled Client"}
                       </span>
                     </div>
@@ -1325,7 +1325,7 @@ export function AdminDashboard({
                     <button
                       type="button"
                       onClick={() => handleDeleteCaseStudy(idx)}
-                      className="px-3 py-1 rounded-xl bg-red-950/60 border border-red-500/30 text-red-300 hover:text-white hover:bg-red-900/80 text-xs font-medium flex items-center gap-1.5 transition-all"
+                      className="px-3 py-1 rounded-xl bg-red-50 border border-red-200 text-red-700 hover:bg-red-100 hover:text-white hover:bg-red-900/80 text-xs font-medium flex items-center gap-1.5 transition-all"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                       <span>Remove</span>
@@ -1334,7 +1334,7 @@ export function AdminDashboard({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-400 mb-1">Client Name</label>
+                      <label className="block text-[11px] font-semibold text-slate-700 mb-1">Client Name</label>
                       <input
                         type="text"
                         value={cs.client}
@@ -1344,12 +1344,12 @@ export function AdminDashboard({
                           setContent({ ...content, caseStudies: updated });
                         }}
                         placeholder="e.g. AuraPay"
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white font-bold"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500 font-bold"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-400 mb-1">Industry / Service Tag</label>
+                      <label className="block text-[11px] font-semibold text-slate-700 mb-1">Industry / Service Tag</label>
                       <input
                         type="text"
                         value={cs.tag}
@@ -1359,14 +1359,14 @@ export function AdminDashboard({
                           setContent({ ...content, caseStudies: updated });
                         }}
                         placeholder="e.g. Software & Technology"
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-cyan-300"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-blue-700"
                       />
                     </div>
                   </div>
 
                   {/* Image input and uploader */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-400 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">
                       Case Study Showcase Image URL
                     </label>
                     <div className="flex items-center gap-3">
@@ -1379,10 +1379,10 @@ export function AdminDashboard({
                           setContent({ ...content, caseStudies: updated });
                         }}
                         placeholder="/images/case_aurapay.svg"
-                        className="flex-1 bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white"
+                        className="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
                       />
 
-                      <label className="px-3.5 py-2 rounded-xl bg-cyan-950 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
+                      <label className="px-3.5 py-2 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 hover:text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
                         <Upload className="w-3.5 h-3.5" />
                         <span>Upload Image</span>
                         <input
@@ -1402,7 +1402,7 @@ export function AdminDashboard({
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-400 mb-1">Results Headline</label>
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">Results Headline</label>
                     <input
                       type="text"
                       value={cs.headline}
@@ -1412,12 +1412,12 @@ export function AdminDashboard({
                         setContent({ ...content, caseStudies: updated });
                       }}
                       placeholder="e.g. From Low Web Traffic to 450+ Qualified Monthly Inquiries"
-                      className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-white"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-400 mb-1">Story &amp; Overview</label>
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-1">Story &amp; Overview</label>
                     <textarea
                       rows={3}
                       value={cs.story}
@@ -1426,13 +1426,13 @@ export function AdminDashboard({
                         updated[idx].story = e.target.value;
                         setContent({ ...content, caseStudies: updated });
                       }}
-                      className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-slate-300 leading-relaxed"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-600 leading-relaxed"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-400 mb-1">Client Quote</label>
+                      <label className="block text-[11px] font-semibold text-slate-700 mb-1">Client Quote</label>
                       <input
                         type="text"
                         value={cs.quote}
@@ -1441,12 +1441,12 @@ export function AdminDashboard({
                           updated[idx].quote = e.target.value;
                           setContent({ ...content, caseStudies: updated });
                         }}
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-slate-300 italic"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-600 italic"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-semibold text-slate-400 mb-1">Quote Author</label>
+                      <label className="block text-[11px] font-semibold text-slate-700 mb-1">Quote Author</label>
                       <input
                         type="text"
                         value={cs.author || ""}
@@ -1456,14 +1456,14 @@ export function AdminDashboard({
                           setContent({ ...content, caseStudies: updated });
                         }}
                         placeholder="e.g. Marcus Vance, Founder"
-                        className="w-full bg-[#080f28] border border-white/10 rounded-xl px-3 py-2 text-xs text-cyan-400 font-semibold"
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-blue-600 font-semibold"
                       />
                     </div>
                   </div>
 
                   {/* Factual Metrics (3 Result Pills) */}
                   <div className="pt-2">
-                    <label className="block text-[11px] font-semibold text-slate-400 mb-2">
+                    <label className="block text-[11px] font-semibold text-slate-700 mb-2">
                       Factual Result Metrics (3 Highlights)
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1472,9 +1472,9 @@ export function AdminDashboard({
                         { label: "Metric 2", value: "2x" },
                         { label: "Metric 3", value: "Fast" },
                       ]).map((m: any, mIdx: number) => (
-                        <div key={mIdx} className="p-3 rounded-xl bg-[#080f28] border border-white/10 space-y-2">
+                        <div key={mIdx} className="p-3 rounded-lg bg-white border border-slate-200 space-y-2">
                           <div>
-                            <span className="text-[10px] text-slate-400 block mb-0.5">Value</span>
+                            <span className="text-[10px] text-slate-500 block mb-0.5">Value</span>
                             <input
                               type="text"
                               value={m.value}
@@ -1485,12 +1485,12 @@ export function AdminDashboard({
                                 updatedStudies[idx].metrics = updatedMetrics;
                                 setContent({ ...content, caseStudies: updatedStudies });
                               }}
-                              className="w-full bg-[#040816] border border-white/10 rounded-lg px-2.5 py-1 text-xs text-cyan-400 font-bold"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-xs text-blue-600 font-bold"
                             />
                           </div>
 
                           <div>
-                            <span className="text-[10px] text-slate-400 block mb-0.5">Label</span>
+                            <span className="text-[10px] text-slate-500 block mb-0.5">Label</span>
                             <input
                               type="text"
                               value={m.label}
@@ -1501,7 +1501,7 @@ export function AdminDashboard({
                                 updatedStudies[idx].metrics = updatedMetrics;
                                 setContent({ ...content, caseStudies: updatedStudies });
                               }}
-                              className="w-full bg-[#040816] border border-white/10 rounded-lg px-2.5 py-1 text-[11px] text-slate-300"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-[11px] text-slate-600"
                             />
                           </div>
                         </div>
@@ -1516,18 +1516,18 @@ export function AdminDashboard({
 
         {/* ===================== TAB 8: SETTINGS & WHATSAPP ===================== */}
         {activeTab === "settings" && (
-          <div className="rounded-3xl p-6 sm:p-8 bg-[#080f28]/80 border border-white/10 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-xs space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <div>
-                <h2 className="text-xl font-bold text-white">Site Settings &amp; Contact Numbers</h2>
-                <p className="text-xs text-slate-400 mt-1">
+                <h2 className="text-xl font-bold text-slate-900">Site Settings &amp; Contact Numbers</h2>
+                <p className="text-xs text-slate-500 mt-1">
                   Update your active WhatsApp number and contact email linked throughout the site
                 </p>
               </div>
               <button
                 onClick={handleSaveSettings}
                 disabled={isSaving}
-                className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs flex items-center gap-1.5"
               >
                 <Save className="w-4 h-4" />
                 <span>{isSaving ? "Saving..." : "Save Settings"}</span>
@@ -1536,7 +1536,7 @@ export function AdminDashboard({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   WhatsApp Number (Click-to-chat)
                 </label>
                 <div className="relative">
@@ -1550,7 +1550,7 @@ export function AdminDashboard({
                         siteSettings: { ...content.siteSettings, whatsappNumber: e.target.value },
                       })
                     }
-                    className="w-full bg-[#040816] border border-white/15 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
                 <p className="text-[10px] text-slate-500 mt-1">
@@ -1559,11 +1559,11 @@ export function AdminDashboard({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Contact Email Address
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 text-cyan-400 absolute left-3.5 top-3" />
+                  <Mail className="w-4 h-4 text-blue-600 absolute left-3.5 top-3" />
                   <input
                     type="email"
                     value={content.siteSettings?.contactEmail || "raveliantcontact@gmail.com"}
@@ -1573,7 +1573,7 @@ export function AdminDashboard({
                         siteSettings: { ...content.siteSettings, contactEmail: e.target.value },
                       })
                     }
-                    className="w-full bg-[#040816] border border-white/15 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-4 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
                 <p className="text-[10px] text-slate-500 mt-1">
@@ -1583,7 +1583,7 @@ export function AdminDashboard({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Client Availability Status
               </label>
               <input
@@ -1595,11 +1595,11 @@ export function AdminDashboard({
                     siteSettings: { ...content.siteSettings, availableSlots: e.target.value },
                   })
                 }
-                className="w-full bg-[#040816] border border-white/15 rounded-xl px-3.5 py-2.5 text-xs text-white"
+                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               />
             </div>
 
-            <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+            <div className="pt-6 border-t border-slate-200 flex items-center justify-between">
               <div>
                 <h4 className="text-xs font-bold text-red-400">Emergency Reset</h4>
                 <p className="text-[11px] text-slate-500">Restore all website copy to initial curated defaults</p>
@@ -1608,7 +1608,7 @@ export function AdminDashboard({
               <button
                 type="button"
                 onClick={handleResetDefaults}
-                className="px-4 py-2 rounded-xl bg-red-950 border border-red-500/30 text-red-300 hover:text-white text-xs font-semibold flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl bg-red-50 border border-red-200 text-red-700 hover:bg-red-100 hover:text-white text-xs font-semibold flex items-center gap-1.5"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Reset to Defaults</span>
