@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import {
-  TrendingUp,
   ArrowRight,
   Quote,
 } from "lucide-react";

@@ -11,8 +11,8 @@ interface NavbarProps {
 }
 
 export function Navbar({
-  whatsappNumber = "0704692220",
-  contactEmail = "raveliantcontact@gmail.com",
+  whatsappNumber: _whatsappNumber = "0704692220",
+  contactEmail: _contactEmail = "raveliantcontact@gmail.com",
 }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

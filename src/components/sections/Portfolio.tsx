@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import {
   ExternalLink,
-  Briefcase,
   ArrowRight,
 } from "lucide-react";
 

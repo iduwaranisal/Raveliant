@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Inbox,
   FolderGit2,
-  FileText,
   Settings,
   Plus,
   Trash2,
@@ -19,7 +18,6 @@ import {
   MessageCircle,
   Mail,
   ExternalLink,
-  Eye,
   RefreshCw,
   LogOut,
   Layers,
