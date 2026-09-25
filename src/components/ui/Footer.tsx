@@ -31,31 +31,29 @@ export function Footer({
 
   return (
     <footer className="relative bg-white border-t border-slate-200 pt-16 pb-12 overflow-hidden text-slate-600">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3 group inline-block">
-              <div className="relative w-9 h-9 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-sm">
-                <div className="w-full h-full rounded-[10px] overflow-hidden bg-white flex items-center justify-center">
-                  <Image
-                    src="/logo.jpg"
-                    alt="Raveliant Logo"
-                    width={36}
-                    height={36}
-                    className="object-cover scale-110"
-                  />
-                </div>
+              <div className="relative w-9 h-9 rounded-lg overflow-hidden border border-slate-200 bg-white p-0.5 shadow-xs flex items-center justify-center">
+                <Image
+                  src="/logo.jpg"
+                  alt="Raveliant Logo"
+                  width={36}
+                  height={36}
+                  className="object-cover rounded-md"
+                />
               </div>
               
               <div className="flex flex-col">
-                <span className="text-lg font-extrabold tracking-wider text-slate-900 font-sans flex items-center gap-1">
+                <span className="text-lg font-bold tracking-tight text-slate-900 flex items-center gap-1.5 leading-none">
                   RAVELIANT
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                 </span>
-                <span className="text-[8px] font-mono tracking-[0.2em] text-blue-600 font-bold -mt-1">
+                <span className="text-[9px] font-mono tracking-widest text-blue-600 font-bold mt-0.5">
                   DIGITAL SOLUTIONS
                 </span>
               </div>
@@ -73,7 +71,7 @@ export function Footer({
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-emerald-300 text-emerald-800 hover:text-emerald-900 text-xs font-semibold hover:bg-emerald-50 transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 text-xs font-medium transition-colors shadow-xs"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
                 <span>WhatsApp: {whatsappNumber}</span>
@@ -81,7 +79,7 @@ export function Footer({
 
               <a
                 href={`mailto:${contactEmail}`}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 hover:text-slate-900 text-xs font-semibold hover:bg-slate-100 transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 hover:text-blue-700 hover:border-blue-300 text-xs font-medium transition-colors shadow-xs"
               >
                 <Mail className="w-3.5 h-3.5 text-blue-600" />
                 <span>{contactEmail}</span>
@@ -143,7 +141,7 @@ export function Footer({
             </p>
 
             {subscribed ? (
-              <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-1.5">
+              <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-1.5">
                 <Check className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Thank you for subscribing!</span>
               </div>
@@ -155,11 +153,11 @@ export function Footer({
                   placeholder="yourname@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 placeholder:text-slate-400 transition-all"
                 />
                 <button
                   type="submit"
-                  className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors flex items-center justify-center gap-1 shadow-sm shadow-blue-500/20"
+                  className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1 shadow-xs"
                 >
                   <span>Subscribe</span>
                   <ArrowRight className="w-3.5 h-3.5" />

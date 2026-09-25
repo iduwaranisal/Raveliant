@@ -25,7 +25,7 @@ export default async function Home() {
   const contactEmail = content.siteSettings?.contactEmail || "raveliantcontact@gmail.com";
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white">
       {/* Sticky Clean Navbar */}
       <Navbar />
 

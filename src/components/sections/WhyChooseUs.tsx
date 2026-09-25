@@ -68,12 +68,13 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
   };
 
   return (
-    <section id="why-us" className="relative py-20 sm:py-24 bg-white border-b border-slate-200">
+    <section id="why-us" className="relative py-20 sm:py-24 bg-white border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-3">
+            <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
             <span>{whyUsData?.badgeText || "THE STRATEGIC PARTNER"}</span>
           </div>
 
@@ -87,32 +88,32 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
           </p>
         </div>
 
-        {/* 3 Core Points */}
+        {/* 3 Core Points - Harmonized Blue Brand Theme */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {pointsList.map((p: any, idx: number) => {
             const Icon = p.icon || iconMap[idx % 3] || ShieldCheck;
             return (
               <div
                 key={p.title || idx}
-                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200 hover:border-slate-300 hover:bg-white transition-all flex flex-col justify-between shadow-xs"
+                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 hover:bg-white transition-all flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+                    <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 border border-blue-100/80 flex items-center justify-center">
                       <Icon className="w-5 h-5" />
                     </div>
                     {p.badge && (
-                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-white text-indigo-700 border border-indigo-200 shadow-xs">
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-white text-blue-700 border border-blue-200/70 shadow-xs">
                         {p.badge}
                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-1">
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">
                     {p.title}
                   </h3>
                   {p.subtitle && (
-                    <p className="text-xs font-semibold text-indigo-600 mb-3">
+                    <p className="text-xs font-semibold text-blue-600 mb-3">
                       {p.subtitle}
                     </p>
                   )}
@@ -125,10 +126,10 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
           })}
         </div>
 
-        {/* Clean Before / After Comparison */}
+        {/* Clean Before / After Comparison - Crisp & Balanced */}
         <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-10 max-w-4xl mx-auto shadow-xs">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-slate-900">
+            <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
               The Difference Is Simple
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -139,20 +140,20 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* The Old Way */}
-            <div className="p-6 rounded-xl bg-white border border-rose-200 space-y-3 shadow-xs">
-              <div className="text-xs font-bold uppercase tracking-wider text-rose-800 flex items-center gap-2">
+            <div className="p-6 rounded-xl bg-white border border-slate-200 space-y-3 shadow-xs">
+              <div className="text-xs font-bold uppercase tracking-wider text-rose-700 flex items-center gap-2">
                 <XCircle className="w-4 h-4 text-rose-500" />
                 <span>The Traditional Way</span>
               </div>
               {oldWayList.map((item: string, i: number) => (
-                <p key={i} className="text-xs text-slate-700 leading-relaxed">
+                <p key={i} className="text-xs text-slate-600 leading-relaxed">
                   • {item}
                 </p>
               ))}
             </div>
 
             {/* The Raveliant Way */}
-            <div className="p-6 rounded-xl bg-blue-50/50 border border-blue-200 space-y-3 shadow-xs">
+            <div className="p-6 rounded-xl bg-blue-50/40 border border-blue-200/80 space-y-3 shadow-xs">
               <div className="text-xs font-bold uppercase tracking-wider text-blue-900 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-blue-600" />
                 <span>The Raveliant Way</span>

@@ -158,7 +158,7 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
 
               {/* Quote */}
               <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-start gap-3 shadow-xs">
-                <Quote className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
+                <Quote className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                 <div>
                   <p className="text-xs sm:text-sm italic text-slate-700">
                     &ldquo;{currentStudy.quote}&rdquo;
