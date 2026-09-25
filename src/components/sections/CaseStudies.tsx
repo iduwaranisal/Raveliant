@@ -71,21 +71,21 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
   const currentStudy = studies[activeTab] || studies[0] || defaultStudies[0];
 
   return (
-    <section id="case-studies" className="relative py-24 sm:py-28 bg-[#030614] overflow-hidden">
+    <section id="case-studies" className="relative py-24 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/25 bg-cyan-950/40 text-cyan-300 text-xs font-semibold mb-4">
-            <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-4 shadow-sm">
+            <TrendingUp className="w-3.5 h-3.5 text-blue-600" />
             <span>REAL CLIENT RESULTS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Client Success Stories
           </h2>
 
-          <p className="mt-4 text-slate-300 text-base sm:text-lg">
+          <p className="mt-4 text-slate-600 text-base sm:text-lg">
             See how combining a fast website, smart AI assistance, and targeted social
             media ads helped these businesses increase customer volume and save time.
           </p>
@@ -99,8 +99,8 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
               onClick={() => setActiveTab(idx)}
               className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all border ${
                 activeTab === idx
-                  ? "bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20"
-                  : "bg-white/[0.03] text-slate-400 border-white/10 hover:text-white"
+                  ? "bg-blue-600 text-white border-blue-600 shadow-sm font-bold"
+                  : "bg-slate-100 text-slate-600 border-slate-200 hover:text-slate-900 hover:bg-slate-200"
               }`}
             >
               {item.client}
@@ -114,13 +114,13 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.25 }}
-          className="rounded-3xl border border-white/10 bg-[#080f28]/90 backdrop-blur-xl p-5 sm:p-10 max-w-5xl mx-auto shadow-2xl"
+          className="rounded-3xl border border-slate-200 bg-slate-50/70 p-6 sm:p-10 max-w-5xl mx-auto shadow-md"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left Column: Visual Mockup Image */}
             <div className="lg:col-span-6 space-y-4">
-              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#040816] shadow-xl">
+              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-sm">
                 <Image
                   src={currentStudy.image || "/images/case_aurapay.svg"}
                   alt={currentStudy.client || "Case Study"}
@@ -131,16 +131,16 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
 
               {/* 3 Metric Pills */}
               {currentStudy.metrics && (
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {currentStudy.metrics.map((m: any, idx: number) => (
                     <div
                       key={m.label || idx}
-                      className="p-2 sm:p-3 rounded-xl bg-white/[0.03] border border-white/10 text-center"
+                      className="p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200 text-center shadow-xs"
                     >
-                      <div className="text-xs sm:text-base font-black text-cyan-400">
+                      <div className="text-xs sm:text-base font-extrabold text-blue-600">
                         {m.value}
                       </div>
-                      <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium mt-0.5 line-clamp-1">
+                      <div className="text-[10px] text-slate-500 font-semibold mt-0.5 line-clamp-1">
                         {m.label}
                       </div>
                     </div>
@@ -152,26 +152,26 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
             {/* Right Column: Story & Testimonial */}
             <div className="lg:col-span-6 space-y-5">
               <div>
-                <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
+                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
                   {currentStudy.tag}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1 leading-snug">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1 leading-snug">
                   {currentStudy.headline}
                 </h3>
               </div>
 
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 {currentStudy.story}
               </p>
 
               {/* Quote */}
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 flex items-start gap-3">
-                <Quote className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 flex items-start gap-3 shadow-xs">
+                <Quote className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-xs sm:text-sm italic text-slate-300">
+                  <p className="text-xs sm:text-sm italic text-slate-700">
                     &ldquo;{currentStudy.quote}&rdquo;
                   </p>
-                  <p className="text-xs text-cyan-400 font-semibold mt-1">
+                  <p className="text-xs text-blue-600 font-bold mt-1">
                     — {currentStudy.author}
                   </p>
                 </div>
@@ -180,7 +180,7 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
               <div className="pt-2 flex justify-start">
                 <a
                   href="#contact"
-                  className="text-xs font-bold text-cyan-400 hover:text-white flex items-center gap-1 group"
+                  className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 group"
                 >
                   <span>Want results like this? Request your free review</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

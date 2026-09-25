@@ -295,21 +295,21 @@ export function AdminDashboard({
   // LOGIN SCREEN
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-[#030614] flex items-center justify-center p-4">
-        <div className="w-full max-w-md p-8 rounded-3xl bg-[#080f28]/95 border border-white/10 shadow-2xl backdrop-blur-xl text-center space-y-6">
-          <div className="w-14 h-14 rounded-2xl bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center mx-auto text-cyan-400">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <div className="w-full max-w-md p-8 rounded-3xl bg-white border border-slate-200 shadow-xl text-center space-y-6">
+          <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center mx-auto text-blue-600 shadow-xs">
             <Lock className="w-7 h-7" />
           </div>
 
           <div>
-            <h1 className="text-2xl font-extrabold text-white">Raveliant Management Access</h1>
-            <p className="text-xs text-slate-400 mt-1">
+            <h1 className="text-2xl font-extrabold text-slate-900">Raveliant Management Access</h1>
+            <p className="text-xs text-slate-500 mt-1">
               Enter your administrative access key to manage client inquiries and site content
             </p>
           </div>
 
           {authError && (
-            <div className="p-3 rounded-xl bg-red-950/50 border border-red-500/30 text-red-200 text-xs">
+            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs">
               {authError}
             </div>
           )}
@@ -320,20 +320,20 @@ export function AdminDashboard({
               placeholder="Enter administrative key..."
               value={passwordInput}
               onChange={(e) => setPasswordInput(e.target.value)}
-              className="w-full bg-[#040816] border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400 text-center"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-center"
               autoFocus
             />
 
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm transition-all shadow-md shadow-cyan-400/20 disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all shadow-md shadow-blue-500/20 disabled:opacity-50"
             >
               {isLoggingIn ? "Authenticating..." : "Sign In Securely"}
             </button>
           </form>
 
-          <Link href="/" className="inline-block text-xs text-slate-400 hover:text-white">
+          <Link href="/" className="inline-block text-xs text-slate-500 hover:text-blue-600 font-medium">
             ← Return to Website
           </Link>
         </div>

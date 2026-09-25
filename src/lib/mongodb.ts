@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI || "";
-
 interface MongooseCache {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -18,8 +16,12 @@ if (!global.mongooseCache) {
 }
 
 export async function connectToDatabase(): Promise<typeof mongoose> {
-  if (!MONGODB_URI) {
-    throw new Error("MONGODB_URI is not set in environment variables. Please configure it in .env.local or production host.");
+  const uri = process.env.MONGODB_URI || "";
+
+  if (!uri) {
+    throw new Error(
+      "MONGODB_URI is not set in environment variables. Please configure it in .env.local or production host."
+    );
   }
 
   if (cached.conn) {
@@ -30,9 +32,10 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
     const opts = {
       bufferCommands: false,
       maxPoolSize: 10,
+      dbName: "Raveliant",
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((m) => {
+    cached.promise = mongoose.connect(uri, opts).then((m) => {
       return m;
     });
   }

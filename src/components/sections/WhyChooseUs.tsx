@@ -69,25 +69,21 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
   };
 
   return (
-    <section id="why-us" className="relative py-24 sm:py-28 bg-[#040816] overflow-hidden">
-      {/* Background Lighting */}
-      <div className="absolute top-1/3 right-0 w-80 h-80 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-80 h-80 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-
+    <section id="why-us" className="relative py-24 sm:py-28 bg-white border-b border-slate-200/80 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-purple-500/25 bg-purple-950/40 text-purple-300 text-xs font-semibold mb-4">
-            <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold mb-4 shadow-sm">
+            <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
             <span>{whyUsData?.badgeText || "THE STRATEGIC PARTNER"}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             {whyUsData?.heading || "Why Work With Us?"}
           </h2>
 
-          <p className="mt-4 text-slate-300 text-base sm:text-lg">
+          <p className="mt-4 text-slate-600 text-base sm:text-lg">
             {whyUsData?.subheading ||
               "Stop wasting time managing disconnected agencies. We give you a single, reliable team dedicated to bringing you more customer inquiries every month."}
           </p>
@@ -104,29 +100,29 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="rounded-3xl p-6 sm:p-8 bg-gradient-to-b from-white/[0.05] to-white/[0.01] border border-white/10 hover:border-cyan-500/30 transition-all flex flex-col justify-between"
+                className="rounded-3xl p-6 sm:p-8 bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-white transition-all flex flex-col justify-between shadow-sm hover:shadow-md"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-cyan-950/80 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center shadow-xs">
                       <Icon className="w-6 h-6" />
                     </div>
                     {p.badge && (
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-indigo-700 border border-indigo-200 shadow-xs">
                         {p.badge}
                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-1.5">
+                  <h3 className="text-xl font-bold text-slate-900 mb-1.5">
                     {p.title}
                   </h3>
                   {p.subtitle && (
-                    <p className="text-xs font-medium text-cyan-400 mb-4">
+                    <p className="text-xs font-semibold text-indigo-600 mb-4">
                       {p.subtitle}
                     </p>
                   )}
-                  <p className="text-sm text-slate-300 leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed">
                     {p.description}
                   </p>
                 </div>
@@ -136,12 +132,12 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
         </div>
 
         {/* Clean Before / After Comparison */}
-        <div className="rounded-3xl border border-white/10 bg-[#080f28]/80 backdrop-blur-xl p-5 sm:p-10 max-w-4xl mx-auto shadow-xl">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 max-w-4xl mx-auto shadow-md">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className="text-2xl font-bold text-slate-900">
               The Difference Is Simple
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
               How Raveliant compares to hiring typical agencies
             </p>
           </div>
@@ -149,26 +145,26 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* The Old Way */}
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 space-y-3.5">
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                <XCircle className="w-4 h-4 text-red-400" />
+            <div className="p-6 rounded-2xl bg-rose-50/70 border border-rose-200 space-y-3.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-rose-900 flex items-center gap-2">
+                <XCircle className="w-4 h-4 text-rose-500" />
                 <span>The Traditional Way</span>
               </div>
               {oldWayList.map((item: string, i: number) => (
-                <p key={i} className="text-xs text-slate-400">
+                <p key={i} className="text-xs text-rose-800 leading-relaxed font-medium">
                   • {item}
                 </p>
               ))}
             </div>
 
             {/* The Raveliant Way */}
-            <div className="p-6 rounded-2xl bg-cyan-950/40 border border-cyan-500/30 space-y-3.5 shadow-md">
-              <div className="text-xs font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+            <div className="p-6 rounded-2xl bg-blue-50/80 border border-blue-200 space-y-3.5 shadow-sm">
+              <div className="text-xs font-bold uppercase tracking-wider text-blue-900 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-blue-600" />
                 <span>The Raveliant Way</span>
               </div>
               {raveliantWayList.map((item: string, i: number) => (
-                <p key={i} className="text-xs text-slate-200">
+                <p key={i} className="text-xs text-blue-900 leading-relaxed font-medium">
                   ✓ {item}
                 </p>
               ))}
@@ -176,13 +172,13 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
 
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <span className="text-xs text-slate-400">
+          <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <span className="text-xs text-slate-600 font-medium">
               Want to see what we can do for your business?
             </span>
             <a
               href="#contact"
-              className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5"
+              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm shadow-blue-500/20"
             >
               <span>Get Your Free Growth Audit</span>
               <ArrowRight className="w-3.5 h-3.5" />

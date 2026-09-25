@@ -6,10 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
   Briefcase,
-  CheckCircle2,
-  Sparkles,
   ArrowRight,
-  Filter,
 } from "lucide-react";
 
 export interface ProjectItem {
@@ -51,7 +48,6 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
     if (filter === "All") return true;
     if (projectCategory === filter) return true;
 
-    // Normalization & backwards compatibility
     const catLower = (projectCategory || "").toLowerCase();
     if (filter === "Build a Fast Modern Website") {
       return (
@@ -100,25 +96,21 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
   );
 
   return (
-    <section id="portfolio" className="relative py-24 sm:py-28 bg-[#040816] overflow-hidden">
-      {/* Background Lighting */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
-
+    <section id="portfolio" className="relative py-24 sm:py-28 bg-slate-50/70 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/25 bg-cyan-950/40 text-cyan-300 text-xs font-semibold mb-4">
-            <Briefcase className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-4 shadow-sm">
+            <Briefcase className="w-3.5 h-3.5 text-blue-600" />
             <span>SELECTED CLIENT WORK</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Our Project Portfolio
           </h2>
 
-          <p className="mt-4 text-slate-300 text-base sm:text-lg">
+          <p className="mt-4 text-slate-600 text-base sm:text-lg">
             Explore recent websites, conversational AI tools, and targeted advertising
             campaigns built to scale client operations.
           </p>
@@ -132,8 +124,8 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all border ${
                 selectedCategory === cat
-                  ? "bg-cyan-500 text-slate-950 border-cyan-400 shadow-md shadow-cyan-500/20 font-bold"
-                  : "bg-white/[0.03] text-slate-400 border-white/10 hover:text-white hover:border-white/20"
+                  ? "bg-blue-600 text-white border-blue-600 shadow-sm font-bold"
+                  : "bg-white text-slate-600 border-slate-200 hover:text-slate-900 hover:bg-slate-100"
               }`}
             >
               {cat}
@@ -144,7 +136,7 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
         {/* Projects Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <AnimatePresence>
-            {filteredProjects.map((project, idx) => (
+            {filteredProjects.map((project) => (
               <motion.div
                 key={project._id || project.title}
                 layout
@@ -152,40 +144,39 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
-                className="rounded-3xl p-5 sm:p-6 bg-gradient-to-b from-white/[0.05] to-white/[0.01] border border-white/10 hover:border-cyan-500/40 transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-cyan-500/10"
+                className="rounded-3xl p-5 sm:p-6 bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between group shadow-sm"
               >
                 <div>
                   {/* Image Container */}
-                  <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#040816] mb-5 group-hover:border-cyan-500/30 transition-colors">
+                  <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 mb-5 group-hover:border-blue-300 transition-colors">
                     <Image
                       src={project.image || "/images/service_web.jpg"}
                       alt={project.title}
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#040816]/80 via-transparent to-transparent pointer-events-none" />
 
                     {/* Top Floating Badge */}
-                    <div className="absolute top-3 left-3 bg-[#040816]/85 backdrop-blur-md border border-white/15 px-3 py-1 rounded-lg text-[11px] font-semibold text-cyan-300 max-w-[85%] truncate">
+                    <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md border border-slate-200 px-3 py-1 rounded-lg text-[11px] font-bold text-blue-700 max-w-[85%] truncate shadow-xs">
                       {project.category}
                     </div>
 
                     {project.highlight && (
-                      <div className="absolute bottom-3 left-3 bg-cyan-950/80 backdrop-blur-md border border-cyan-500/40 px-2.5 py-1 rounded-lg text-[10px] font-bold text-cyan-200">
+                      <div className="absolute bottom-3 left-3 bg-blue-600 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-white shadow-xs">
                         ★ {project.highlight}
                       </div>
                     )}
                   </div>
 
                   {/* Client & Title */}
-                  <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                  <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                     {project.client}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                     {project.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
                     {project.description}
                   </p>
 
@@ -195,7 +186,7 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2.5 py-0.5 rounded-md bg-white/[0.03] border border-white/5 text-[10px] text-slate-400"
+                          className="px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-[11px] text-slate-600 font-medium"
                         >
                           {tag}
                         </span>
@@ -205,14 +196,14 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
                 </div>
 
                 {/* Bottom CTA */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs text-slate-400">Live Client Project</span>
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-xs font-medium text-slate-500">Live Client Project</span>
                   {project.liveUrl ? (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-bold text-cyan-300 hover:text-white flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                      className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                     >
                       <span>Explore</span>
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -220,7 +211,7 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
                   ) : (
                     <a
                       href="#contact"
-                      className="text-xs font-bold text-cyan-300 hover:text-white flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                      className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                     >
                       <span>Inquire</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -233,19 +224,19 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
         </motion.div>
 
         {/* Portfolio Bottom Banner */}
-        <div className="mt-14 p-5 sm:p-8 rounded-3xl bg-gradient-to-r from-cyan-950/60 via-[#0a1330] to-purple-950/60 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 border border-blue-200/80 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div>
-            <h4 className="text-lg font-bold text-white">
+            <h4 className="text-lg font-bold text-slate-900">
               Have a project or custom requirements in mind?
             </h4>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
               We design and engineer bespoke web platforms and AI tools tailored to your business model.
             </p>
           </div>
 
           <a
             href="#contact"
-            className="px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-1.5 shrink-0 transition-all shadow-md shadow-cyan-400/20"
+            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5 shrink-0 transition-all shadow-sm shadow-blue-500/20"
           >
             <span>Start Your Project</span>
             <ArrowRight className="w-4 h-4" />

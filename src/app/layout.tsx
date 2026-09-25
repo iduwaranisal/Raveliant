@@ -18,7 +18,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#040816",
+  themeColor: "#f8fafc",
 };
 
 export const metadata: Metadata = {
@@ -60,11 +60,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${mono.variable} scroll-smooth dark`}>
+    <html lang="en" className={`${jakarta.variable} ${mono.variable} scroll-smooth`}>
       <head>
         <link rel="icon" href="/logo.jpg" type="image/jpeg" />
       </head>
-      <body className="min-h-screen bg-[#040816] text-slate-100 antialiased font-sans selection:bg-cyan-500 selection:text-black relative">
+      <body className="min-h-screen bg-slate-50 text-slate-900 antialiased font-sans selection:bg-blue-600 selection:text-white relative">
         {children}
       </body>
     </html>

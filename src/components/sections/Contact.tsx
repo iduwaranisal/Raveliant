@@ -56,7 +56,6 @@ export function Contact({
     setErrorMessage("");
 
     try {
-      // Call Next.js Server Action
       const result = await submitContactForm(formData);
 
       if (result.success) {
@@ -67,7 +66,7 @@ export function Contact({
         setErrorMessage(errorText);
         showToast(errorText, "error");
       }
-    } catch (err: any) {
+    } catch {
       const errorText = "Something went wrong. Please chat with us directly on WhatsApp.";
       setErrorMessage(errorText);
       showToast(errorText, "error");
@@ -77,7 +76,7 @@ export function Contact({
   };
 
   return (
-    <section id="contact" className="relative py-24 sm:py-28 bg-[#040816] overflow-hidden">
+    <section id="contact" className="relative py-24 sm:py-28 bg-slate-50 overflow-hidden">
       {/* Floating Toast Notification */}
       <AnimatePresence>
         {toast && (
@@ -86,27 +85,27 @@ export function Contact({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className={`fixed top-4 left-4 right-4 sm:left-auto sm:right-6 sm:top-6 sm:max-w-md z-50 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl border shadow-2xl flex items-center gap-3 text-xs sm:text-sm font-semibold backdrop-blur-xl ${
+            className={`fixed top-4 left-4 right-4 sm:left-auto sm:right-6 sm:top-6 sm:max-w-md z-50 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl border shadow-xl flex items-center gap-3 text-xs sm:text-sm font-semibold backdrop-blur-xl ${
               toast.type === "success"
-                ? "bg-[#091f1c]/95 border-emerald-500/40 text-emerald-200 shadow-emerald-950/40"
-                : "bg-[#250d18]/95 border-red-500/40 text-red-200 shadow-red-950/40"
+                ? "bg-white border-emerald-300 text-slate-900 shadow-emerald-500/10"
+                : "bg-white border-red-300 text-slate-900 shadow-red-500/10"
             }`}
           >
             {toast.type === "success" ? (
-              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
             ) : (
-              <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
+              <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
             )}
             <div className="flex flex-col pr-2">
-              <span className="font-bold text-white">
+              <span className="font-bold text-slate-900">
                 {toast.type === "success" ? "Request Submitted" : "Notice"}
               </span>
-              <span className="text-xs text-slate-300 font-normal">{toast.message}</span>
+              <span className="text-xs text-slate-600 font-normal">{toast.message}</span>
             </div>
             <button
               type="button"
               onClick={() => setToast(null)}
-              className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors ml-auto"
+              className="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition-colors ml-auto"
             >
               <X className="w-4 h-4" />
             </button>
@@ -114,23 +113,20 @@ export function Contact({
         )}
       </AnimatePresence>
 
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none" />
-
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/25 bg-cyan-950/40 text-cyan-300 text-xs font-semibold mb-4">
-            <Mail className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-4 shadow-sm">
+            <Mail className="w-3.5 h-3.5 text-blue-600" />
             <span>TALK TO US</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Get Your Free Growth Audit
           </h2>
 
-          <p className="mt-4 text-slate-300 text-sm sm:text-base">
+          <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
             Tell us about your business. We will personally review your website,
             social media presence, and customer experience, then send you a factual analysis of what to improve.
           </p>
@@ -141,42 +137,42 @@ export function Contact({
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-emerald-500/30 text-emerald-300 hover:text-white text-xs sm:text-sm font-semibold hover:bg-emerald-950/40 hover:border-emerald-500/60 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-emerald-300 text-emerald-700 hover:text-emerald-800 text-xs sm:text-sm font-semibold hover:bg-emerald-50 shadow-xs transition-all"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+              <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Direct WhatsApp: {whatsappNumber}</span>
             </a>
 
             <a
               href={`mailto:${contactEmail}`}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-slate-300 hover:text-white text-xs sm:text-sm font-semibold hover:border-cyan-500/40 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-semibold hover:bg-slate-50 shadow-xs transition-all"
             >
-              <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
+              <Mail className="w-4 h-4 text-blue-600 shrink-0" />
               <span>{contactEmail}</span>
             </a>
           </div>
         </div>
 
-        {/* Card */}
-        <div className="rounded-3xl border border-white/10 bg-[#080f28]/90 backdrop-blur-xl p-5 sm:p-10 shadow-2xl max-w-2xl mx-auto">
+        {/* Form Card */}
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xl max-w-2xl mx-auto">
           {submitted ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="py-10 text-center space-y-4"
             >
-              <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
+              <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
-              <h3 className="text-2xl font-bold text-white">
+              <h3 className="text-2xl font-bold text-slate-900">
                 We Received Your Request!
               </h3>
 
-              <p className="text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
-                Thank you, <span className="text-cyan-400 font-semibold">{formData.name}</span>.
+              <p className="text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
+                Thank you, <span className="text-blue-600 font-bold">{formData.name}</span>.
                 We have saved your inquiry for{" "}
-                <span className="text-cyan-400 font-semibold">{formData.businessUrl}</span>{" "}
+                <span className="text-blue-600 font-bold">{formData.businessUrl}</span>{" "}
                 into our system and will email your review to you within 4 business hours.
               </p>
 
@@ -185,7 +181,7 @@ export function Contact({
                   href={waUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs flex items-center gap-1.5"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm shadow-emerald-600/20"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Instant Chat on WhatsApp</span>
@@ -204,7 +200,7 @@ export function Contact({
                       message: "",
                     });
                   }}
-                  className="text-xs text-slate-400 hover:text-white underline"
+                  className="text-xs text-slate-500 hover:text-slate-800 underline"
                 >
                   Send another message
                 </button>
@@ -214,15 +210,15 @@ export function Contact({
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               
               {errorMessage && (
-                <div className="p-3.5 rounded-xl bg-red-950/50 border border-red-500/30 text-red-200 text-xs flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     Your Name *
                   </label>
                   <input
@@ -231,12 +227,12 @@ export function Contact({
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Alex Morgan"
-                    className="w-full bg-[#05091a] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     Email Address *
                   </label>
                   <input
@@ -245,7 +241,7 @@ export function Contact({
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="alex@company.com"
-                    className="w-full bg-[#05091a] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all"
                   />
                 </div>
               </div>
@@ -253,7 +249,7 @@ export function Contact({
               {/* Contact Number & WhatsApp Number */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     Contact Number *
                   </label>
                   <div className="relative">
@@ -263,14 +259,14 @@ export function Contact({
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="e.g. 070 123 4567"
-                      className="w-full bg-[#05091a] border border-white/10 rounded-xl px-4 py-2.5 pl-10 text-sm text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-500"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all"
                     />
                     <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     WhatsApp Number <span className="text-slate-400 font-normal">(Optional)</span>
                   </label>
                   <div className="relative">
@@ -279,18 +275,18 @@ export function Contact({
                       value={formData.whatsapp}
                       onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
                       placeholder="e.g. 070 123 4567"
-                      className="w-full bg-[#05091a] border border-white/10 rounded-xl px-4 py-2.5 pl-10 text-sm text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-500"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all"
                     />
-                    <MessageCircle className="w-4 h-4 text-emerald-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <MessageCircle className="w-4 h-4 text-emerald-600 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
+                  <p className="text-[11px] text-slate-500 mt-1">
                     Both numbers can be the same.
                   </p>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Website or Business Name *
                 </label>
                 <input
@@ -299,18 +295,18 @@ export function Contact({
                   value={formData.businessUrl}
                   onChange={(e) => setFormData({ ...formData, businessUrl: e.target.value })}
                   placeholder="https://yourbusiness.com"
-                  className="w-full bg-[#05091a] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   What is your main goal? *
                 </label>
                 <select
                   value={formData.primaryGoal}
                   onChange={(e) => setFormData({ ...formData, primaryGoal: e.target.value })}
-                  className="w-full bg-[#05091a] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 >
                   <option value="Get More Customer Calls & Inquiries">Get More Customer Calls &amp; Inquiries</option>
                   <option value="Build a Fast Modern Website">Build a Fast Modern Website</option>
@@ -321,7 +317,7 @@ export function Contact({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   How can we help? (Optional)
                 </label>
                 <textarea
@@ -329,14 +325,14 @@ export function Contact({
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us what your business does and what you would like to improve..."
-                  className="w-full bg-[#05091a] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-slate-400 transition-all"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-300 hover:from-cyan-300 hover:to-white text-slate-950 font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-400/20 disabled:opacity-50"
+                className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-blue-500/20 disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <span>Submitting Request...</span>
@@ -348,13 +344,13 @@ export function Contact({
                 )}
               </button>
 
-              <div className="pt-2 flex items-center justify-center gap-4 text-xs text-slate-400">
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-cyan-400" />
+              <div className="pt-2 flex items-center justify-center gap-6 text-xs text-slate-500">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-4 h-4 text-blue-600" />
                   <span>Quick 4-Hour Response</span>
                 </span>
-                <span className="flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   <span>100% Confidential</span>
                 </span>
               </div>

@@ -18,10 +18,10 @@ export function Hero({ heroData }: HeroProps) {
   ];
 
   return (
-    <section className="relative pt-32 pb-20 sm:pt-36 sm:pb-24 overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[400px] h-[300px] bg-purple-600/10 rounded-full blur-[130px] pointer-events-none" />
+    <section className="relative pt-32 pb-20 sm:pt-36 sm:pb-24 overflow-hidden bg-gradient-to-b from-blue-50/40 via-slate-50 to-slate-50">
+      {/* Soft, calm background gradient accents - easy on the eyes */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-100/50 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[400px] h-[300px] bg-indigo-100/40 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -32,9 +32,9 @@ export function Hero({ heroData }: HeroProps) {
           transition={{ duration: 0.4 }}
           className="flex justify-center mb-6"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/25 bg-cyan-950/40 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            <span className="text-xs font-semibold text-cyan-300">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200 bg-white/90 shadow-sm backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-blue-600" />
+            <span className="text-xs font-semibold text-blue-700">
               {heroData?.badgeText || "Websites • AI Chatbots • Social Media Ads"}
             </span>
           </div>
@@ -46,7 +46,7 @@ export function Hero({ heroData }: HeroProps) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05 }}
-            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15]"
+            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.15]"
           >
             {heroData?.headlineMain || "We Don't Just Build Software."}{" "}
             <span className="text-gradient-cyan-purple block mt-1 sm:mt-2">
@@ -58,7 +58,7 @@ export function Hero({ heroData }: HeroProps) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="mt-6 text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed"
+            className="mt-6 text-sm sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
           >
             {heroData?.subheadline ||
               "We build fast modern websites, set up smart AI chatbots that save you hours of manual work, and run social media ads that bring a steady stream of new clients directly to your business."}
@@ -73,16 +73,16 @@ export function Hero({ heroData }: HeroProps) {
           >
             <a
               href="#contact"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-cyan-300 hover:from-cyan-300 hover:to-white transition-all shadow-lg shadow-cyan-400/20 flex items-center justify-center gap-2 text-sm sm:text-base"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-md shadow-blue-500/20 hover:shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base"
             >
-              <Sparkles className="w-4 h-4 text-slate-950" />
+              <Sparkles className="w-4 h-4 text-white" />
               <span>{heroData?.primaryCta || "Get Your Free Growth Audit"}</span>
               <ArrowRight className="w-4 h-4" />
             </a>
 
             <a
               href="#services"
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-slate-200 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 shadow-sm transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
             >
               <span>See How We Help</span>
             </a>
@@ -104,10 +104,10 @@ export function Hero({ heroData }: HeroProps) {
           {highlights.map((item: any, idx: number) => (
             <div
               key={item.title || idx}
-              className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.02] border border-white/5 text-center"
+              className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm text-center"
             >
-              <div className="text-xs sm:text-sm font-bold text-white">{item.title}</div>
-              <div className="text-[11px] sm:text-xs text-slate-400 mt-1">{item.desc}</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-900">{item.title}</div>
+              <div className="text-[11px] sm:text-xs text-slate-500 mt-1">{item.desc}</div>
             </div>
           ))}
         </div>
