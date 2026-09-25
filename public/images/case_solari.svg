@@ -1,0 +1,50 @@
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="solariBg" x1="0" y1="0" x2="600" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#040816"/>
+      <stop offset="100%" stop-color="#140b28"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="340" fill="url(#solariBg)"/>
+  <circle cx="480" cy="160" r="130" fill="#a855f7" fill-opacity="0.12" filter="blur(50px)"/>
+
+  <!-- Mobile E-commerce Phone Frame -->
+  <g transform="translate(60, 25)">
+    <rect width="180" height="290" rx="24" fill="#0d1430" stroke="rgba(168,85,247,0.3)" stroke-width="2"/>
+    <rect x="8" y="8" width="164" height="274" rx="18" fill="#060a1c"/>
+    
+    <!-- Product Header -->
+    <rect x="18" y="20" width="144" height="110" rx="12" fill="linear-gradient(135deg, #1e1b4b, #3b0764)"/>
+    <circle cx="90" cy="75" r="28" fill="rgba(255,255,255,0.15)"/>
+    <text x="90" y="80" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold">STOREFRONT</text>
+
+    <!-- Product Details -->
+    <rect x="18" y="145" width="100" height="10" rx="5" fill="#ffffff"/>
+    <rect x="18" y="162" width="60" height="8" rx="4" fill="rgba(255,255,255,0.5)"/>
+
+    <!-- 1-Click Checkout Button -->
+    <rect x="18" y="185" width="144" height="34" rx="10" fill="#a855f7"/>
+    <text x="90" y="206" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold">Fast 1-Click Order</text>
+
+    <!-- Live AI Chat Pill -->
+    <rect x="18" y="232" width="144" height="36" rx="10" fill="rgba(0,245,255,0.1)" stroke="rgba(0,245,255,0.2)"/>
+    <circle cx="34" cy="250" r="8" fill="#00f5ff"/>
+    <text x="50" y="254" fill="#a5f3fc" font-family="sans-serif" font-size="9" font-weight="bold">AI Support: Active 24/7</text>
+  </g>
+
+  <!-- Right Details & Results Panel -->
+  <g transform="translate(270, 45)">
+    <rect width="280" height="80" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+    <text x="24" y="32" fill="#94a3b8" font-family="sans-serif" font-size="11">Mobile Order Volume</text>
+    <text x="24" y="62" fill="#ffffff" font-family="sans-serif" font-size="24" font-weight="bold">+230% Lift</text>
+
+    <rect y="95" width="280" height="80" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+    <text x="24" y="127" fill="#94a3b8" font-family="sans-serif" font-size="11">Customer Support Automated</text>
+    <text x="24" y="157" fill="#a855f7" font-family="sans-serif" font-size="24" font-weight="bold">68% Handled by AI</text>
+
+    <rect y="190" width="280" height="60" rx="14" fill="rgba(0,245,255,0.08)" stroke="rgba(0,245,255,0.2)"/>
+    <text x="24" y="215" fill="#67e8f9" font-family="sans-serif" font-size="10" font-weight="bold">CHECKOUT ACCELERATION</text>
+    <text x="24" y="235" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">-45% Drop-off Rate</text>
+  </g>
+</svg>

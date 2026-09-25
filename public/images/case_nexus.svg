@@ -1,0 +1,44 @@
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="nexusBg" x1="0" y1="0" x2="600" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#040816"/>
+      <stop offset="100%" stop-color="#0a1828"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="340" fill="url(#nexusBg)"/>
+  <circle cx="500" cy="180" r="140" fill="#00f5ff" fill-opacity="0.1" filter="blur(60px)"/>
+
+  <!-- Portal Dashboard -->
+  <g transform="translate(40, 30)">
+    <rect width="520" height="280" rx="16" fill="#091326" stroke="rgba(0,245,255,0.2)" stroke-width="1.5"/>
+    
+    <!-- Top Nav -->
+    <rect width="520" height="40" rx="16" fill="rgba(255,255,255,0.03)"/>
+    <text x="24" y="25" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold">Nexus Client Operations Portal</text>
+    <rect x="420" y="10" width="80" height="20" rx="10" fill="rgba(16,185,129,0.2)"/>
+    <text x="430" y="24" fill="#34d399" font-family="sans-serif" font-size="10" font-weight="bold">99.9% Uptime</text>
+
+    <!-- 3 Stat Blocks -->
+    <rect x="25" y="60" width="145" height="85" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="38" y="85" fill="#94a3b8" font-family="sans-serif" font-size="11">Enterprise Accounts</text>
+    <text x="38" y="118" fill="#ffffff" font-family="sans-serif" font-size="22" font-weight="bold">14 Won</text>
+
+    <rect x="185" y="60" width="145" height="85" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="198" y="85" fill="#94a3b8" font-family="sans-serif" font-size="11">Time Saved Weekly</text>
+    <text x="198" y="118" fill="#00f5ff" font-family="sans-serif" font-size="22" font-weight="bold">70 Hours</text>
+
+    <rect x="345" y="60" width="145" height="85" rx="12" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <text x="358" y="85" fill="#94a3b8" font-family="sans-serif" font-size="11">Manual Errors</text>
+    <text x="358" y="118" fill="#34d399" font-family="sans-serif" font-size="22" font-weight="bold">0%</text>
+
+    <!-- Dispatch Route Activity -->
+    <g transform="translate(25, 165)">
+      <rect width="465" height="95" rx="12" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.05)"/>
+      <text x="20" y="30" fill="#e2e8f0" font-family="sans-serif" font-size="12" font-weight="bold">Automated Dispatch &amp; Client Routing</text>
+      <rect x="20" y="45" width="425" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>
+      <rect x="20" y="45" width="340" height="12" rx="6" fill="linear-gradient(90deg, #00f5ff, #3b82f6)"/>
+      <text x="20" y="78" fill="#94a3b8" font-family="sans-serif" font-size="10">80% Routine Client Inquiries Automated via Web Dashboard</text>
+    </g>
+  </g>
+</svg>

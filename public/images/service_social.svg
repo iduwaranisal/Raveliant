@@ -1,0 +1,106 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#040816"/>
+      <stop offset="50%" stop-color="#0b1333"/>
+      <stop offset="100%" stop-color="#040816"/>
+    </linearGradient>
+    <linearGradient id="phoneGrad1" x1="0" y1="0" x2="0" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#182348"/>
+      <stop offset="100%" stop-color="#0d152d"/>
+    </linearGradient>
+    <linearGradient id="feedGrad1" x1="0" y1="0" x2="200" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="feedGrad2" x1="0" y1="0" x2="200" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f5ff"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="glow1" x="250" y="30" width="300" height="380" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="30" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+
+  <!-- Ambient Glow Circles -->
+  <circle cx="280" cy="200" r="160" fill="#a855f7" fill-opacity="0.15" filter="blur(60px)"/>
+  <circle cx="520" cy="220" r="160" fill="#00f5ff" fill-opacity="0.15" filter="blur(60px)"/>
+
+  <!-- Subtle Grid Lines -->
+  <path d="M50 380 H750" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <path d="M50 300 H750" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <path d="M50 220 H750" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- Phone 1 (Left - Instagram/Reels Style) -->
+  <g transform="translate(240, 50)">
+    <!-- Phone Body -->
+    <rect x="0" y="0" width="160" height="320" rx="28" fill="url(#phoneGrad1)" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+    <!-- Screen -->
+    <rect x="8" y="8" width="144" height="304" rx="22" fill="#050a1a"/>
+    <!-- Video Feed Background -->
+    <rect x="12" y="12" width="136" height="250" rx="16" fill="url(#feedGrad1)" fill-opacity="0.85"/>
+    
+    <!-- Video Play Button Overlay -->
+    <circle cx="80" cy="130" r="22" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+    <polygon points="76,120 88,130 76,140" fill="#ffffff"/>
+
+    <!-- Bottom Caption Bar -->
+    <rect x="20" y="225" width="80" height="8" rx="4" fill="#ffffff"/>
+    <rect x="20" y="238" width="50" height="6" rx="3" fill="rgba(255,255,255,0.6)"/>
+
+    <!-- Right Interaction Icons -->
+    <circle cx="132" cy="160" r="10" fill="rgba(0,0,0,0.4)"/>
+    <path d="M132 157 C130 154, 126 156, 126 159 C126 163, 132 166, 132 166 C132 166, 138 163, 138 159 C138 156, 134 154, 132 157 Z" fill="#ec4899"/>
+    
+    <circle cx="132" cy="190" r="10" fill="rgba(0,0,0,0.4)"/>
+    <rect x="128" y="186" width="8" height="6" rx="2" fill="#ffffff"/>
+
+    <circle cx="132" cy="220" r="10" fill="rgba(0,0,0,0.4)"/>
+    <polygon points="128,217 136,220 128,223" fill="#ffffff"/>
+
+    <!-- Dynamic Metrics Pill -->
+    <rect x="12" y="270" width="136" height="34" rx="10" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.1)"/>
+    <text x="22" y="285" fill="#a5f3fc" font-family="sans-serif" font-size="9" font-weight="bold">ENGAGEMENT</text>
+    <text x="22" y="297" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold">+480% Reach</text>
+  </g>
+
+  <!-- Phone 2 (Right - TikTok/Campaign Style) -->
+  <g transform="translate(420, 75)">
+    <!-- Phone Body -->
+    <rect x="0" y="0" width="150" height="300" rx="26" fill="url(#phoneGrad1)" stroke="rgba(0,245,255,0.3)" stroke-width="2"/>
+    <!-- Screen -->
+    <rect x="8" y="8" width="134" height="284" rx="20" fill="#050a1a"/>
+    <!-- Video Feed Background -->
+    <rect x="12" y="12" width="126" height="230" rx="16" fill="url(#feedGrad2)" fill-opacity="0.85"/>
+
+    <!-- Visual Hook Wave -->
+    <path d="M20 160 Q 50 120 75 140 T 130 110" stroke="#00f5ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- Heart Icon -->
+    <circle cx="120" cy="140" r="9" fill="rgba(0,0,0,0.5)"/>
+    <path d="M120 138 C118 135, 115 137, 115 139 C115 143, 120 145, 120 145 C120 145, 125 143, 125 139 C125 137, 122 135, 120 138 Z" fill="#ffffff"/>
+
+    <rect x="20" y="195" width="90" height="7" rx="3.5" fill="#ffffff"/>
+    <rect x="20" y="208" width="60" height="5" rx="2.5" fill="rgba(255,255,255,0.7)"/>
+
+    <!-- Bottom Campaign Stats -->
+    <rect x="12" y="250" width="126" height="34" rx="10" fill="rgba(0,245,255,0.08)" stroke="rgba(0,245,255,0.2)"/>
+    <text x="20" y="265" fill="#67e8f9" font-family="sans-serif" font-size="9" font-weight="bold">ACTIVE CAMPAIGN</text>
+    <text x="20" y="277" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold">Steady Inquiries</text>
+  </g>
+
+  <!-- Floating Achievement Badge (Center Top) -->
+  <g transform="translate(320, 20)">
+    <rect x="0" y="0" width="170" height="42" rx="21" fill="rgba(8,15,38,0.9)" stroke="rgba(0,245,255,0.4)" stroke-width="1.5"/>
+    <circle cx="22" cy="21" r="10" fill="#00f5ff" fill-opacity="0.2"/>
+    <circle cx="22" cy="21" r="5" fill="#00f5ff"/>
+    <text x="40" y="20" fill="#a5f3fc" font-family="sans-serif" font-size="9" font-weight="bold">TARGETED ADS</text>
+    <text x="40" y="32" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold">Consistent Inquiries</text>
+  </g>
+</svg>
