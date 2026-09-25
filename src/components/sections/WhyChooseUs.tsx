@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import {
   Code,
   TrendingUp,
@@ -72,7 +73,13 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-3">
             <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
             <span>{whyUsData?.badgeText || "THE STRATEGIC PARTNER"}</span>
@@ -86,20 +93,24 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
             {whyUsData?.subheading ||
               "Stop wasting time managing disconnected agencies. We give you a single, reliable team dedicated to bringing you more customer inquiries every month."}
           </p>
-        </div>
+        </motion.div>
 
         {/* 3 Core Points - Harmonized Blue Brand Theme */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {pointsList.map((p: any, idx: number) => {
             const Icon = p.icon || iconMap[idx % 3] || ShieldCheck;
             return (
-              <div
+              <motion.div
                 key={p.title || idx}
-                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 hover:bg-white transition-all flex flex-col justify-between shadow-xs"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: idx * 0.1, ease: "easeOut" }}
+                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200/80 hover:border-blue-300 hover:bg-white hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col justify-between shadow-xs group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 border border-blue-100/80 flex items-center justify-center">
+                    <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 border border-blue-100/80 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                       <Icon className="w-5 h-5" />
                     </div>
                     {p.badge && (
@@ -109,7 +120,7 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
                     )}
                   </div>
 
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">
+                  <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
                     {p.title}
                   </h3>
                   {p.subtitle && (
@@ -121,13 +132,19 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
                     {p.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
 
         {/* Clean Before / After Comparison - Crisp & Balanced */}
-        <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-10 max-w-4xl mx-auto shadow-xs">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="rounded-2xl border border-slate-200 bg-slate-50/50 p-6 sm:p-10 max-w-4xl mx-auto shadow-xs"
+        >
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
               The Difference Is Simple
@@ -179,7 +196,7 @@ export function WhyChooseUs({ whyUsData }: WhyChooseUsProps) {
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

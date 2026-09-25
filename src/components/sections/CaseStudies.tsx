@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Quote,
@@ -73,7 +74,13 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-14"
+        >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-3">
             <span>REAL CLIENT RESULTS</span>
           </div>
@@ -86,17 +93,17 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
             See how combining a fast website, smart AI assistance, and targeted social
             media ads helped these businesses increase customer volume and save time.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Tab Selector */}
+        {/* Tab Selector with smooth pill states */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {studies.map((item, idx) => (
             <button
               key={item.client ? `${item.client}-${idx}` : idx}
               onClick={() => setActiveTab(idx)}
-              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors border ${
+              className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 border active:scale-95 ${
                 activeTab === idx
-                  ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                  ? "bg-blue-600 text-white border-blue-600 shadow-xs font-bold"
                   : "bg-slate-100 text-slate-600 border-slate-200 hover:text-slate-900 hover:bg-slate-200"
               }`}
             >
@@ -105,82 +112,94 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
           ))}
         </div>
 
-        {/* Selected Case Study Card - instant, no motion lag */}
-        <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-10 max-w-5xl mx-auto shadow-xs">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            {/* Left Column: Visual Mockup Image */}
-            <div className="lg:col-span-6 space-y-4">
-              <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs">
-                <Image
-                  src={currentStudy.image || "/images/case_aurapay.svg"}
-                  alt={currentStudy.client || "Case Study"}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              {/* 3 Metric Pills */}
-              {currentStudy.metrics && (
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  {currentStudy.metrics.map((m: any, idx: number) => (
-                    <div
-                      key={m.label || idx}
-                      className="p-3 rounded-lg bg-white border border-slate-200 text-center shadow-xs"
-                    >
-                      <div className="text-sm sm:text-base font-extrabold text-blue-600">
-                        {m.value}
-                      </div>
-                      <div className="text-[10px] text-slate-500 font-semibold mt-0.5 line-clamp-1">
-                        {m.label}
-                      </div>
-                    </div>
-                  ))}
+        {/* Selected Case Study Card with smooth, subtle crossfade */}
+        <motion.div
+          layout
+          className="rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-10 max-w-5xl mx-auto shadow-xs"
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            >
+              
+              {/* Left Column: Visual Mockup Image */}
+              <div className="lg:col-span-6 space-y-4">
+                <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs group">
+                  <Image
+                    src={currentStudy.image || "/images/case_aurapay.svg"}
+                    alt={currentStudy.client || "Case Study"}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
-              )}
-            </div>
 
-            {/* Right Column: Story & Testimonial */}
-            <div className="lg:col-span-6 space-y-5">
-              <div>
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
-                  {currentStudy.tag}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1 leading-snug">
-                  {currentStudy.headline}
-                </h3>
+                {/* 3 Metric Pills with subtle hover response */}
+                {currentStudy.metrics && (
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                    {currentStudy.metrics.map((m: any, idx: number) => (
+                      <div
+                        key={m.label || idx}
+                        className="p-3 rounded-lg bg-white border border-slate-200 text-center shadow-xs hover:-translate-y-0.5 hover:border-blue-200 transition-all duration-200"
+                      >
+                        <div className="text-sm sm:text-base font-extrabold text-blue-600">
+                          {m.value}
+                        </div>
+                        <div className="text-[10px] text-slate-500 font-semibold mt-0.5 line-clamp-1">
+                          {m.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              <p className="text-sm text-slate-600 leading-relaxed">
-                {currentStudy.story}
-              </p>
-
-              {/* Quote */}
-              <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-start gap-3 shadow-xs">
-                <Quote className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+              {/* Right Column: Story & Testimonial */}
+              <div className="lg:col-span-6 space-y-5">
                 <div>
-                  <p className="text-xs sm:text-sm italic text-slate-700">
-                    &ldquo;{currentStudy.quote}&rdquo;
-                  </p>
-                  <p className="text-xs text-blue-600 font-bold mt-1">
-                    — {currentStudy.author}
-                  </p>
+                  <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+                    {currentStudy.tag}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1 leading-snug">
+                    {currentStudy.headline}
+                  </h3>
+                </div>
+
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {currentStudy.story}
+                </p>
+
+                {/* Quote */}
+                <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-start gap-3 shadow-xs">
+                  <Quote className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs sm:text-sm italic text-slate-700">
+                      &ldquo;{currentStudy.quote}&rdquo;
+                    </p>
+                    <p className="text-xs text-blue-600 font-bold mt-1">
+                      — {currentStudy.author}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex justify-start">
+                  <a
+                    href="#contact"
+                    className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 transition-colors group/link"
+                  >
+                    <span>Want results like this? Request your free review</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
+                  </a>
                 </div>
               </div>
 
-              <div className="pt-2 flex justify-start">
-                <a
-                  href="#contact"
-                  className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1"
-                >
-                  <span>Want results like this? Request your free review</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
 
       </div>
     </section>

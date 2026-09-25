@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import {
   Search,
   Code2,
@@ -67,7 +68,13 @@ export function Process({ processData }: ProcessProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-3">
             <span>SIMPLE &amp; TRANSPARENT</span>
           </div>
@@ -79,28 +86,32 @@ export function Process({ processData }: ProcessProps) {
           <p className="mt-4 text-slate-600 text-base sm:text-lg">
             A simple, 4-step process designed to take the stress out of getting new customer inquiries online.
           </p>
-        </div>
+        </motion.div>
 
         {/* 4 Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step: any, idx: number) => {
             const Icon = (typeof step.icon === "function" ? step.icon : null) || iconMap[idx % 4] || Search;
             return (
-              <div
+              <motion.div
                 key={step.number}
-                className="rounded-2xl p-6 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all flex flex-col justify-between shadow-xs"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: idx * 0.08, ease: "easeOut" }}
+                className="rounded-2xl p-6 bg-white border border-slate-200 hover:border-blue-300 hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col justify-between shadow-xs group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-black text-blue-600 font-mono">
+                    <span className="text-2xl font-black text-blue-600 font-mono group-hover:scale-105 transition-transform">
                       {step.number}
                     </span>
-                    <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-200">
                       <Icon className="w-4 h-4" />
                     </div>
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-900 mb-1">
+                  <h3 className="text-base font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors">
                     {step.title}
                   </h3>
 
@@ -117,7 +128,7 @@ export function Process({ processData }: ProcessProps) {
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span className="text-xs font-semibold text-emerald-700">{step.deliverable}</span>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

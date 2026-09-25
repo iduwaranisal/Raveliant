@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   Code2,
   Bot,
@@ -72,7 +73,13 @@ export function Services({ servicesData }: ServicesProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold mb-3">
             <span>WHAT WE DO</span>
           </div>
@@ -85,21 +92,25 @@ export function Services({ servicesData }: ServicesProps) {
             We handle your website, customer automations, and targeted social media ads
             together so you can focus on serving your clients.
           </p>
-        </div>
+        </motion.div>
 
         {/* 3 Core Services Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {(servicesData && servicesData.length > 0 ? servicesData : defaultServices).map((srv, idx) => {
             const Icon = srv.icon || (idx === 0 ? Code2 : idx === 1 ? Bot : Megaphone);
             return (
-              <div
+              <motion.div
                 key={srv.title}
-                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200 hover:border-blue-300 hover:bg-white transition-all duration-200 flex flex-col justify-between shadow-xs hover:shadow-md"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: idx * 0.1, ease: "easeOut" }}
+                className="rounded-2xl p-6 sm:p-7 bg-slate-50/70 border border-slate-200 hover:border-blue-300 hover:bg-white hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col justify-between shadow-xs group"
               >
                 <div>
                   {/* Top Bar with Icon & Badge */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center">
+                    <div className="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                       <Icon className="w-5 h-5" />
                     </div>
                     <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-white text-slate-700 border border-slate-200 shadow-xs">
@@ -107,17 +118,17 @@ export function Services({ servicesData }: ServicesProps) {
                     </span>
                   </div>
 
-                  {/* Visual Image Preview */}
+                  {/* Visual Image Preview with subtle zoom on hover */}
                   <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 mb-5 bg-slate-100">
                     <Image
                       src={srv.image}
                       alt={srv.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-1.5">
+                  <h3 className="text-xl font-bold text-slate-900 mb-1.5 group-hover:text-blue-600 transition-colors">
                     {srv.title}
                   </h3>
 
@@ -146,13 +157,13 @@ export function Services({ servicesData }: ServicesProps) {
                   </div>
                   <a
                     href="#contact"
-                    className="text-xs font-bold text-slate-700 hover:text-blue-600 flex items-center gap-1 transition-colors self-start sm:self-auto"
+                    className="text-xs font-bold text-slate-700 hover:text-blue-600 flex items-center gap-1 transition-colors self-start sm:self-auto group/btn"
                   >
                     <span>Get Started</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
