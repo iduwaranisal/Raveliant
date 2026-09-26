@@ -128,11 +128,6 @@ export function Footer({
                   FAQs &amp; Answers
                 </Link>
               </li>
-              <li>
-                <Link href="/admin" className="hover:text-blue-600 transition-colors">
-                  Admin Panel
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -182,7 +177,6 @@ export function Footer({
             <span className="hover:text-slate-800 cursor-pointer">Privacy</span>
             <span className="hover:text-slate-800 cursor-pointer">Terms</span>
             <a href="#contact" className="hover:text-slate-800">Contact Us</a>
-            <Link href="/admin" className="hover:text-blue-600 font-medium">Admin Portal</Link>
           </div>
         </div>
 
