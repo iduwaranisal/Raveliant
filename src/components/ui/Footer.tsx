@@ -94,39 +94,44 @@ export function Footer({
             </h4>
             <ul className="space-y-2 text-xs text-slate-600">
               <li>
-                <a href="#services" className="hover:text-blue-600 transition-colors">
+                <Link href="/#services" className="hover:text-blue-600 transition-colors">
                   Websites &amp; Web Apps
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#services" className="hover:text-blue-600 transition-colors">
+                <Link href="/#services" className="hover:text-blue-600 transition-colors">
                   AI Chatbots &amp; Automation
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#services" className="hover:text-blue-600 transition-colors">
+                <Link href="/#services" className="hover:text-blue-600 transition-colors">
                   Social Media Ads
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#portfolio" className="hover:text-blue-600 transition-colors">
+                <Link href="/portfolio" className="hover:text-blue-600 transition-colors">
                   Project Portfolio
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#process" className="hover:text-blue-600 transition-colors">
+                <Link href="/case-studies" className="hover:text-blue-600 transition-colors">
+                  Client Case Studies
+                </Link>
+              </li>
+              <li>
+                <Link href="/#process" className="hover:text-blue-600 transition-colors">
                   How We Work
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#case-studies" className="hover:text-blue-600 transition-colors">
-                  Client Results
-                </a>
+                <Link href="/#faq" className="hover:text-blue-600 transition-colors">
+                  FAQs &amp; Answers
+                </Link>
               </li>
               <li>
-                <a href="/admin" className="hover:text-blue-600 transition-colors">
+                <Link href="/admin" className="hover:text-blue-600 transition-colors">
                   Admin Panel
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

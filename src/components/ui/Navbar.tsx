@@ -31,6 +31,7 @@ export function Navbar({
     { name: "Why Us", href: "/#why-us" },
     { name: "Process", href: "/#process" },
     { name: "Case Studies", href: "/#case-studies" },
+    { name: "FAQ", href: "/#faq" },
     { name: "Contact", href: "/#contact" },
   ];
 

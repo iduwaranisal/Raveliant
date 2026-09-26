@@ -6,13 +6,41 @@ import { CaseStudies } from "@/components/sections/CaseStudies";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/ui/Footer";
 import { getSiteContent } from "@/actions/contentActions";
+import { BreadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://raveliant.com";
+
 export const metadata: Metadata = {
-  title: "Client Case Studies & Documented ROI | Raveliant Digital Solutions",
+  title: "Client Case Studies & Documented ROI",
   description:
-    "Explore our complete collection of real-world client case studies with verified metrics, speed tests, and customer inquiry growth.",
+    "Explore verified client case studies, performance benchmarks, and measurable business growth achieved through Raveliant's custom websites, 24/7 AI chatbots, and ad campaigns.",
+  alternates: {
+    canonical: `${siteUrl}/case-studies`,
+  },
+  openGraph: {
+    title: "Client Case Studies & Documented ROI | Raveliant Digital Solutions",
+    description:
+      "Explore verified client case studies, performance benchmarks, and measurable business growth achieved through Raveliant's custom websites, 24/7 AI chatbots, and ad campaigns.",
+    url: `${siteUrl}/case-studies`,
+    type: "website",
+    images: [
+      {
+        url: "/logo.jpg",
+        width: 1024,
+        height: 1024,
+        alt: "Raveliant Digital Solutions Case Studies",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Case Studies & Documented ROI | Raveliant Digital Solutions",
+    description:
+      "Real metrics, speed tests, and verified client acquisition growth engineered by Raveliant Digital Solutions.",
+    images: ["/logo.jpg"],
+  },
 };
 
 export default async function CaseStudiesPage() {
@@ -24,6 +52,14 @@ export default async function CaseStudiesPage() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white">
+      {/* Search Engine Breadcrumb Schema */}
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: siteUrl },
+          { name: "Case Studies", url: `${siteUrl}/case-studies` },
+        ]}
+      />
+
       {/* Sticky Navbar */}
       <Navbar />
 

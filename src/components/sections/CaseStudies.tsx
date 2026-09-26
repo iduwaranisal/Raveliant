@@ -140,7 +140,7 @@ export function CaseStudies({
                 <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs group">
                   <Image
                     src={currentStudy.image || "/images/case_aurapay.svg"}
-                    alt={currentStudy.client || "Case Study"}
+                    alt={`${currentStudy.client || "Client"} Success Story - ${currentStudy.tag || "Case Study"} | Raveliant Digital Solutions`}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />

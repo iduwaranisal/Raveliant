@@ -122,7 +122,7 @@ export function Services({ servicesData }: ServicesProps) {
                   <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 mb-5 bg-slate-100">
                     <Image
                       src={srv.image}
-                      alt={srv.title}
+                      alt={`${srv.title} - ${srv.tagline} | Raveliant Digital Solutions`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />

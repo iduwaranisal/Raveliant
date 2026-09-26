@@ -7,13 +7,41 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/ui/Footer";
 import { getSiteContent } from "@/actions/contentActions";
 import { getProjects } from "@/actions/portfolioActions";
+import { BreadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://raveliant.com";
+
 export const metadata: Metadata = {
-  title: "Client Portfolio & Web Systems | Raveliant Digital Solutions",
+  title: "Client Portfolio & Web Systems",
   description:
-    "Explore our complete showcase of high-converting modern websites, intelligent AI chatbots, and targeted customer acquisition campaigns.",
+    "Explore our complete showcase of fast modern websites, intelligent conversational AI chatbots, and high-converting client acquisition funnels engineered by Raveliant.",
+  alternates: {
+    canonical: `${siteUrl}/portfolio`,
+  },
+  openGraph: {
+    title: "Client Portfolio & Web Systems | Raveliant Digital Solutions",
+    description:
+      "Explore our complete showcase of fast modern websites, intelligent conversational AI chatbots, and high-converting client acquisition funnels engineered by Raveliant.",
+    url: `${siteUrl}/portfolio`,
+    type: "website",
+    images: [
+      {
+        url: "/logo.jpg",
+        width: 1024,
+        height: 1024,
+        alt: "Raveliant Digital Solutions Portfolio Showcase",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Portfolio & Web Systems | Raveliant Digital Solutions",
+    description:
+      "Explore high-converting modern websites, intelligent AI chatbots, and customer acquisition campaigns engineered to scale businesses.",
+    images: ["/logo.jpg"],
+  },
 };
 
 export default async function PortfolioPage() {
@@ -30,6 +58,14 @@ export default async function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white">
+      {/* Search Engine Breadcrumb Schema */}
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: siteUrl },
+          { name: "Portfolio", url: `${siteUrl}/portfolio` },
+        ]}
+      />
+
       {/* Sticky Navbar */}
       <Navbar />
 

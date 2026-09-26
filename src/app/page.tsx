@@ -5,6 +5,7 @@ import { Portfolio } from "@/components/sections/Portfolio";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { Process } from "@/components/sections/Process";
 import { CaseStudies } from "@/components/sections/CaseStudies";
+import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/ui/Footer";
 import { getSiteContent } from "@/actions/contentActions";
@@ -48,6 +49,9 @@ export default async function Home() {
 
         {/* Real-World Case Studies - Limited to 3 on Homepage */}
         <CaseStudies caseStudiesData={content.caseStudies} limit={3} showViewAll={true} />
+
+        {/* Frequently Asked Questions with Rich Schema.org Markup for SEO */}
+        <FAQ />
 
         {/* Clean Contact & Free Audit Application */}
         <Contact whatsappNumber={whatsappNumber} contactEmail={contactEmail} />

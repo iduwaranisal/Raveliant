@@ -164,7 +164,7 @@ export function Portfolio({
                   <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100 mb-4">
                     <Image
                       src={project.image || "/images/service_web.jpg"}
-                      alt={project.title}
+                      alt={`${project.title} - ${project.category} | Raveliant Digital Solutions`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
