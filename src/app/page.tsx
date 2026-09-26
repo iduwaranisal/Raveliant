@@ -37,8 +37,8 @@ export default async function Home() {
         {/* 3 Core Services: Software, AI, Social Media Marketing */}
         <Services servicesData={content.services} />
 
-        {/* Dynamic Project Portfolio Section */}
-        <Portfolio initialProjects={projects} />
+        {/* Dynamic Project Portfolio Section - Limited to 3 on Homepage */}
+        <Portfolio initialProjects={projects} limit={3} showViewAll={true} />
 
         {/* Why Choose Us - The Strategic Growth Partner */}
         <WhyChooseUs whyUsData={content.whyUs} />
@@ -46,8 +46,8 @@ export default async function Home() {
         {/* 4-Step Proven Process */}
         <Process processData={content.process} />
 
-        {/* Real-World Case Studies */}
-        <CaseStudies caseStudiesData={content.caseStudies} />
+        {/* Real-World Case Studies - Limited to 3 on Homepage */}
+        <CaseStudies caseStudiesData={content.caseStudies} limit={3} showViewAll={true} />
 
         {/* Clean Contact & Free Audit Application */}
         <Contact whatsappNumber={whatsappNumber} contactEmail={contactEmail} />

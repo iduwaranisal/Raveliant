@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
@@ -29,9 +30,15 @@ export interface ProjectItem {
 
 interface PortfolioProps {
   initialProjects?: ProjectItem[];
+  limit?: number;
+  showViewAll?: boolean;
 }
 
-export function Portfolio({ initialProjects = [] }: PortfolioProps) {
+export function Portfolio({
+  initialProjects = [],
+  limit,
+  showViewAll = false,
+}: PortfolioProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const categories = [
@@ -94,6 +101,8 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
     matchCategory(p.category, selectedCategory)
   );
 
+  const displayedProjects = limit ? filteredProjects.slice(0, limit) : filteredProjects;
+
   return (
     <section id="portfolio" className="relative py-20 sm:py-24 bg-slate-50/70 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -140,7 +149,7 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
         {/* Projects Grid with gentle reveal and micro-lift */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => (
+            {displayedProjects.map((project, idx) => (
               <motion.div
                 key={project._id || project.title}
                 layout
@@ -226,6 +235,19 @@ export function Portfolio({ initialProjects = [] }: PortfolioProps) {
             ))}
           </AnimatePresence>
         </div>
+
+        {/* View All Projects Button */}
+        {showViewAll && (
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/portfolio"
+              className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2 group"
+            >
+              <span>View All Projects ({initialProjects.length})</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        )}
 
         {/* Portfolio Bottom Banner */}
         <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">

@@ -26,12 +26,12 @@ export function Navbar({
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Why Us", href: "#why-us" },
-    { name: "Process", href: "#process" },
-    { name: "Results", href: "#case-studies" },
-    { name: "Contact", href: "#contact" },
+    { name: "Services", href: "/#services" },
+    { name: "Portfolio", href: "/#portfolio" },
+    { name: "Why Us", href: "/#why-us" },
+    { name: "Process", href: "/#process" },
+    { name: "Case Studies", href: "/#case-studies" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -72,25 +72,25 @@ export function Navbar({
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1 bg-slate-50 border border-slate-200/80 px-3 py-1 rounded-full">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 className="text-xs font-semibold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-full transition-colors hover:bg-white"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Right Action CTA */}
           <div className="hidden sm:flex items-center gap-3">
-            <a
-              href="#contact"
+            <Link
+              href="/#contact"
               className="px-4 py-2 rounded-lg font-semibold text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition-colors flex items-center gap-1.5 active:scale-[0.99]"
             >
               <span>Get Free Growth Audit</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,26 +112,26 @@ export function Navbar({
         <div className="lg:hidden bg-white border-b border-slate-200 shadow-xl px-5 pt-3 pb-6 space-y-3">
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-sm font-semibold text-slate-700 hover:text-blue-600 hover:bg-slate-50 px-3 py-2 rounded-lg transition-colors"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="pt-3 border-t border-slate-100">
-            <a
-              href="#contact"
+            <Link
+              href="/#contact"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-xs flex items-center justify-center gap-1.5"
             >
               <span>Get Free Growth Audit</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       )}

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -10,9 +11,15 @@ import {
 
 interface CaseStudiesProps {
   caseStudiesData?: any[];
+  limit?: number;
+  showViewAll?: boolean;
 }
 
-export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
+export function CaseStudies({
+  caseStudiesData,
+  limit,
+  showViewAll = false,
+}: CaseStudiesProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   const defaultStudies = [
@@ -66,7 +73,8 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
     },
   ];
 
-  const studies = caseStudiesData?.length ? caseStudiesData : defaultStudies;
+  const allStudies = caseStudiesData?.length ? caseStudiesData : defaultStudies;
+  const studies = limit ? allStudies.slice(0, limit) : allStudies;
   const currentStudy = studies[activeTab] || studies[0] || defaultStudies[0];
 
   return (
@@ -200,6 +208,19 @@ export function CaseStudies({ caseStudiesData }: CaseStudiesProps) {
             </motion.div>
           </AnimatePresence>
         </motion.div>
+
+        {/* View All Case Studies Button */}
+        {showViewAll && (
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/case-studies"
+              className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2 group"
+            >
+              <span>View All Client Success Stories</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        )}
 
       </div>
     </section>
