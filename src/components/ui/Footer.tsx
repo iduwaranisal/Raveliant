@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, MessageCircle, Mail } from "lucide-react";
+import { ArrowRight, Check, MessageCircle, Mail, Loader2 } from "lucide-react";
+import { subscribeNewsletter } from "@/actions/newsletterActions";
 
 interface FooterProps {
   whatsappNumber?: string;
@@ -16,16 +17,33 @@ export function Footer({
 }: FooterProps) {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const cleanNumber = whatsappNumber.replace(/[^0-9]/g, "");
   const waNumber = cleanNumber.startsWith("0") ? `94${cleanNumber.slice(1)}` : cleanNumber;
   const waUrl = `https://wa.me/${waNumber}?text=Hello%20Raveliant%20team%2C%20I%20would%20like%20to%20inquire%20about%20your%20services.`;
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail("");
+    if (!email || loading) return;
+    setLoading(true);
+    setErrorMessage("");
+
+    try {
+      const res = await subscribeNewsletter(email);
+      if (res.success) {
+        setSubscribed(true);
+        setSuccessMessage(res.message || "Thank you for subscribing!");
+        setEmail("");
+      } else {
+        setErrorMessage(res.error || "Failed to subscribe. Please try again.");
+      }
+    } catch {
+      setErrorMessage("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -141,9 +159,9 @@ export function Footer({
             </p>
 
             {subscribed ? (
-              <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-1.5">
-                <Check className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Thank you for subscribing!</span>
+              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-start gap-2 shadow-xs">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span className="leading-snug">{successMessage || "Thank you for subscribing!"}</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-2">
@@ -152,15 +170,33 @@ export function Footer({
                   required
                   placeholder="yourname@company.com"
                   value={email}
+                  disabled={loading}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 placeholder:text-slate-400 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 placeholder:text-slate-400 transition-all disabled:opacity-60"
                 />
+
+                {errorMessage && (
+                  <p className="text-[11px] text-red-600 leading-tight">
+                    {errorMessage}
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1 shadow-xs"
+                  disabled={loading}
+                  className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
                 >
-                  <span>Subscribe</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Subscribing...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Subscribe</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </>
+                  )}
                 </button>
               </form>
             )}

@@ -1,6 +1,7 @@
 import { getSiteContent } from "@/actions/contentActions";
 import { getProjects } from "@/actions/portfolioActions";
 import { getMessages } from "@/actions/contactActions";
+import { getSubscribers } from "@/actions/newsletterActions";
 import { isAdminAuthenticated } from "@/lib/auth";
 import { AdminDashboard } from "./AdminDashboard";
 
@@ -16,14 +17,16 @@ export default async function AdminPage() {
         initialContent={null}
         initialProjects={[]}
         initialMessages={[]}
+        initialSubscribers={[]}
       />
     );
   }
 
-  const [contentRes, projectsRes, messagesRes] = await Promise.all([
+  const [contentRes, projectsRes, messagesRes, subscribersRes] = await Promise.all([
     getSiteContent(),
     getProjects(),
     getMessages(),
+    getSubscribers(),
   ]);
 
   return (
@@ -32,6 +35,7 @@ export default async function AdminPage() {
       initialContent={contentRes.data}
       initialProjects={projectsRes.data}
       initialMessages={messagesRes.data}
+      initialSubscribers={subscribersRes.data || []}
     />
   );
 }

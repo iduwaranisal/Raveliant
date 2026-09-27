@@ -25,8 +25,13 @@ import {
   Lock,
   Phone,
   X,
+  Copy,
+  Check,
+  Search,
+  Users,
 } from "lucide-react";
 import { updateMessageStatus, deleteMessage } from "@/actions/contactActions";
+import { deleteSubscriber } from "@/actions/newsletterActions";
 import {
   updateSiteSettings,
   updateHeroContent,
@@ -45,6 +50,7 @@ interface AdminDashboardProps {
   initialContent: any;
   initialProjects: any[];
   initialMessages: any[];
+  initialSubscribers?: any[];
 }
 
 export function AdminDashboard({
@@ -52,6 +58,7 @@ export function AdminDashboard({
   initialContent,
   initialProjects,
   initialMessages,
+  initialSubscribers = [],
 }: AdminDashboardProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
   const [passwordInput, setPasswordInput] = useState("");
@@ -59,13 +66,18 @@ export function AdminDashboard({
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const [activeTab, setActiveTab] = useState<
-    "inbox" | "portfolio" | "hero" | "services" | "whyUs" | "process" | "caseStudies" | "settings"
+    "inbox" | "newsletter" | "portfolio" | "hero" | "services" | "whyUs" | "process" | "caseStudies" | "settings"
   >("inbox");
 
   // State copies
   const [messages, setMessages] = useState<any[]>(initialMessages || []);
+  const [subscribers, setSubscribers] = useState<any[]>(initialSubscribers || []);
   const [projects, setProjects] = useState<any[]>(initialProjects || []);
   const [content, setContent] = useState<any>(initialContent || {});
+
+  // Newsletter UI state
+  const [subscriberSearch, setSubscriberSearch] = useState("");
+  const [copiedEmails, setCopiedEmails] = useState(false);
 
   // Notification status
   const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -159,6 +171,30 @@ export function AdminDashboard({
     } else {
       showToast("Failed to delete message.", "error");
     }
+  };
+
+  // NEWSLETTER ACTIONS
+  const handleDeleteSubscriber = async (id: string) => {
+    if (!confirm("Are you sure you want to remove this newsletter subscriber?")) return;
+    const res = await deleteSubscriber(id);
+    if (res.success) {
+      setSubscribers((prev) => prev.filter((s) => s._id !== id));
+      showToast("Subscriber removed from list.");
+    } else {
+      showToast(res.error || "Failed to remove subscriber.", "error");
+    }
+  };
+
+  const handleCopyAllEmails = () => {
+    if (subscribers.length === 0) {
+      showToast("No subscriber emails to copy.", "error");
+      return;
+    }
+    const emailList = subscribers.map((s) => s.email).join(", ");
+    navigator.clipboard.writeText(emailList);
+    setCopiedEmails(true);
+    setTimeout(() => setCopiedEmails(false), 2500);
+    showToast(`${subscribers.length} subscriber email(s) copied to clipboard!`);
   };
 
   // PORTFOLIO ACTIONS
@@ -425,6 +461,16 @@ export function AdminDashboard({
           >
             <Inbox className="w-4 h-4" />
             <span>Messages Inbox ({messages.filter((m) => m.status === "unread").length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("newsletter")}
+            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 whitespace-nowrap transition-all ${
+              activeTab === "newsletter" ? "bg-blue-600 text-white shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium"
+            }`}
+          >
+            <Mail className="w-4 h-4" />
+            <span>Growth Newsletter ({subscribers.length})</span>
           </button>
 
           <button
@@ -699,6 +745,158 @@ export function AdminDashboard({
                     </div>
                   );
                 })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ===================== TAB: GROWTH NEWSLETTER SUBSCRIBERS ===================== */}
+        {activeTab === "newsletter" && (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-2xl font-bold text-slate-900">Growth Newsletter Subscribers</h2>
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800 border border-blue-200">
+                    {subscribers.length} {subscribers.length === 1 ? "Member" : "Members"}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 mt-1">
+                  View and manage all verified email subscribers who signed up via the website footer.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleCopyAllEmails}
+                  className="px-4 py-2 rounded-xl text-xs font-bold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 shadow-xs flex items-center gap-2 transition-all cursor-pointer active:scale-95"
+                >
+                  {copiedEmails ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-600" />
+                      <span className="text-emerald-700">Copied to Clipboard!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 text-blue-600" />
+                      <span>Copy All Emails ({subscribers.length})</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Filter and Search Bar */}
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="relative w-full sm:w-80">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Search subscribers by email..."
+                  value={subscriberSearch}
+                  onChange={(e) => setSubscriberSearch(e.target.value)}
+                  className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors"
+                />
+              </div>
+
+              <div className="text-xs text-slate-500 font-medium">
+                Showing{" "}
+                <span className="font-bold text-slate-900">
+                  {
+                    subscribers.filter((s) =>
+                      s.email.toLowerCase().includes(subscriberSearch.toLowerCase())
+                    ).length
+                  }
+                </span>{" "}
+                of {subscribers.length} total subscribers
+              </div>
+            </div>
+
+            {/* Subscribers List */}
+            {subscribers.length === 0 ? (
+              <div className="p-12 text-center bg-white rounded-2xl border border-dashed border-slate-300 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-7 h-7" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">No Newsletter Subscribers Yet</h3>
+                <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1 leading-relaxed">
+                  When visitors submit their email in the &quot;Growth Newsletter&quot; form located in the footer, they will appear here in real time.
+                </p>
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-slate-200 bg-slate-50/70 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                        <th className="py-3.5 px-5">Subscriber Email</th>
+                        <th className="py-3.5 px-5">Form Source</th>
+                        <th className="py-3.5 px-5">Date Subscribed</th>
+                        <th className="py-3.5 px-5 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 text-xs">
+                      {subscribers
+                        .filter((s) =>
+                          s.email.toLowerCase().includes(subscriberSearch.toLowerCase())
+                        )
+                        .map((sub, idx) => {
+                          const dateStr = sub.createdAt
+                            ? new Date(sub.createdAt).toLocaleDateString(undefined, {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })
+                            : "—";
+
+                          return (
+                            <tr
+                              key={sub._id || idx}
+                              className="hover:bg-slate-50/80 transition-colors group"
+                            >
+                              <td className="py-3.5 px-5 font-semibold text-slate-900">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs shrink-0">
+                                    {sub.email.charAt(0).toUpperCase()}
+                                  </div>
+                                  <div>
+                                    <a
+                                      href={`mailto:${sub.email}`}
+                                      className="hover:text-blue-600 transition-colors font-medium"
+                                    >
+                                      {sub.email}
+                                    </a>
+                                  </div>
+                                </div>
+                              </td>
+
+                              <td className="py-3.5 px-5">
+                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                  {sub.source || "Growth Newsletter"}
+                                </span>
+                              </td>
+
+                              <td className="py-3.5 px-5 text-slate-500 font-medium">
+                                {dateStr}
+                              </td>
+
+                              <td className="py-3.5 px-5 text-right">
+                                <button
+                                  onClick={() => handleDeleteSubscriber(sub._id)}
+                                  className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                                  title="Delete Subscriber"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
