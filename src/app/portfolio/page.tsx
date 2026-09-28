@@ -11,19 +11,19 @@ import { BreadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://raveliant.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.raveliant.com";
 
 export const metadata: Metadata = {
-  title: "Client Portfolio & Web Systems",
+  title: "Project Portfolio - Websites, AI & Ad Campaign Showcase",
   description:
-    "Explore our complete showcase of fast modern websites, intelligent conversational AI chatbots, and high-converting client acquisition funnels engineered by Raveliant.",
+    "Browse completed projects built by Raveliant: live client websites, AI chatbot deployments, and social media ad campaigns with documented performance results.",
   alternates: {
     canonical: `${siteUrl}/portfolio`,
   },
   openGraph: {
-    title: "Client Portfolio & Web Systems | Raveliant Digital Solutions",
+    title: "Project Portfolio | Raveliant Digital Solutions",
     description:
-      "Explore our complete showcase of fast modern websites, intelligent conversational AI chatbots, and high-converting client acquisition funnels engineered by Raveliant.",
+      "Browse completed projects built by Raveliant: live client websites, AI chatbot deployments, and social media ad campaigns with documented performance results.",
     url: `${siteUrl}/portfolio`,
     type: "website",
     images: [
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
         url: "/logo.jpg",
         width: 1024,
         height: 1024,
-        alt: "Raveliant Digital Solutions Portfolio Showcase",
+        alt: "Raveliant Portfolio – Client Project Showcase",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Client Portfolio & Web Systems | Raveliant Digital Solutions",
+    title: "Project Portfolio | Raveliant Digital Solutions",
     description:
-      "Explore high-converting modern websites, intelligent AI chatbots, and customer acquisition campaigns engineered to scale businesses.",
+      "Browse completed projects built by Raveliant: live client websites, AI chatbot deployments, and social media ad campaigns with documented results.",
     images: ["/logo.jpg"],
   },
 };

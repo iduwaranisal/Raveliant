@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/ui/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
@@ -12,6 +13,25 @@ import { getSiteContent } from "@/actions/contentActions";
 import { getProjects } from "@/actions/portfolioActions";
 
 export const dynamic = "force-dynamic";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.raveliant.com";
+
+export const metadata: Metadata = {
+  title: "Raveliant Digital Solutions | Modern Websites, AI Chatbots & Growth Agency",
+  description:
+    "Raveliant is a premier digital growth agency engineered for exponential business scale. High-performance Next.js websites, 24/7 AI customer assistants, and targeted paid ad campaigns.",
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    title: "Raveliant Digital Solutions | Modern Websites, AI Chatbots & Growth Agency",
+    description:
+      "Raveliant scales businesses with high-converting websites, intelligent 24/7 AI chatbots, and targeted social media ads.",
+    url: siteUrl,
+    type: "website",
+    siteName: "Raveliant Digital Solutions",
+  },
+};
 
 export default async function Home() {
   const [contentRes, projectsRes] = await Promise.all([

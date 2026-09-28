@@ -5,6 +5,7 @@ import {
   OrganizationSchema,
   WebSiteSchema,
   ProfessionalServiceSchema,
+  HomePageSchema,
 } from "@/components/seo/JsonLd";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -28,7 +29,7 @@ export const viewport: Viewport = {
   themeColor: "#2563eb",
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://raveliant.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.raveliant.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -135,6 +136,7 @@ export default function RootLayout({
         <OrganizationSchema />
         <WebSiteSchema />
         <ProfessionalServiceSchema />
+        <HomePageSchema />
       </head>
       <body className="min-h-screen bg-slate-50 text-slate-900 antialiased font-sans selection:bg-blue-600 selection:text-white relative">
         {children}

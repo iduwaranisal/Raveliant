@@ -1,27 +1,27 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://raveliant.com";
-  const lastModified = new Date();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.raveliant.com";
+  const now = new Date();
 
   return [
     {
       url: `${baseUrl}`,
-      lastModified,
+      lastModified: now,
       changeFrequency: "daily",
       priority: 1.0,
     },
     {
       url: `${baseUrl}/portfolio`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/case-studies`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
   ];
 }

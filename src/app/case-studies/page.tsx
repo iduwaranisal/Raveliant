@@ -10,7 +10,7 @@ import { BreadcrumbSchema } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://raveliant.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.raveliant.com";
 
 export const metadata: Metadata = {
   title: "Client Case Studies & Documented ROI",
