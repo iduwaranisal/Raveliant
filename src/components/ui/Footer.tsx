@@ -27,12 +27,21 @@ export function Footer({
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || loading) return;
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail || loading) return;
+
+    // Basic client-side email regex validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
     setLoading(true);
     setErrorMessage("");
 
     try {
-      const res = await subscribeNewsletter(email);
+      const res = await subscribeNewsletter(trimmedEmail);
       if (res.success) {
         setSubscribed(true);
         setSuccessMessage(res.message || "Thank you for subscribing!");
@@ -210,9 +219,9 @@ export function Footer({
             &copy; {new Date().getFullYear()} Raveliant Digital Solutions. All rights reserved.
           </div>
           <div className="flex items-center space-x-4">
-            <span className="hover:text-slate-800 cursor-pointer">Privacy</span>
-            <span className="hover:text-slate-800 cursor-pointer">Terms</span>
-            <a href="#contact" className="hover:text-slate-800">Contact Us</a>
+            <Link href="/#contact" className="hover:text-slate-800 transition-colors">Privacy</Link>
+            <Link href="/#contact" className="hover:text-slate-800 transition-colors">Terms</Link>
+            <Link href="/#contact" className="hover:text-slate-800 transition-colors">Contact Us</Link>
           </div>
         </div>
 

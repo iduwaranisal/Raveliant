@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -29,6 +29,8 @@ import {
   Check,
   Search,
   Users,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { updateMessageStatus, deleteMessage } from "@/actions/contactActions";
 import { deleteSubscriber } from "@/actions/newsletterActions";
@@ -62,6 +64,7 @@ export function AdminDashboard({
 }: AdminDashboardProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(isAuthenticated);
   const [passwordInput, setPasswordInput] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
@@ -97,6 +100,25 @@ export function AdminDashboard({
     highlight: "",
     featured: true,
   });
+
+  // Lock scroll and handle Escape for project modal
+  useEffect(() => {
+    if (isEditingProject) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setIsEditingProject(false);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "unset";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isEditingProject]);
 
   const showToast = (message: string, type: "success" | "error" = "success") => {
     setNotification({ message, type });
@@ -164,24 +186,33 @@ export function AdminDashboard({
   };
 
   const handleDeleteMessage = async (id: string) => {
-    const res = await deleteMessage(id);
-    if (res.success) {
-      setMessages((prev) => prev.filter((m) => m._id !== id));
-      showToast("Inquiry message deleted.");
-    } else {
-      showToast("Failed to delete message.", "error");
+    if (!confirm("Are you sure you want to delete this client inquiry message?")) return;
+    try {
+      const res = await deleteMessage(id);
+      if (res.success) {
+        setMessages((prev) => prev.filter((m) => m._id !== id));
+        showToast("Inquiry message deleted.");
+      } else {
+        showToast(res.error || "Failed to delete message.", "error");
+      }
+    } catch {
+      showToast("An error occurred while deleting the message.", "error");
     }
   };
 
   // NEWSLETTER ACTIONS
   const handleDeleteSubscriber = async (id: string) => {
     if (!confirm("Are you sure you want to remove this newsletter subscriber?")) return;
-    const res = await deleteSubscriber(id);
-    if (res.success) {
-      setSubscribers((prev) => prev.filter((s) => s._id !== id));
-      showToast("Subscriber removed from list.");
-    } else {
-      showToast(res.error || "Failed to remove subscriber.", "error");
+    try {
+      const res = await deleteSubscriber(id);
+      if (res.success) {
+        setSubscribers((prev) => prev.filter((s) => s._id !== id));
+        showToast("Subscriber removed from list.");
+      } else {
+        showToast(res.error || "Failed to remove subscriber.", "error");
+      }
+    } catch {
+      showToast("An error occurred while removing subscriber.", "error");
     }
   };
 
@@ -202,79 +233,138 @@ export function AdminDashboard({
     e.preventDefault();
     setIsSaving(true);
 
-    const tagsArray = typeof currentProject.tags === "string"
-      ? currentProject.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
-      : currentProject.tags;
+    try {
+      const tagsArray = typeof currentProject.tags === "string"
+        ? currentProject.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
+        : currentProject.tags;
 
-    const projectData = {
-      ...currentProject,
-      tags: tagsArray,
-    };
+      const projectData = {
+        ...currentProject,
+        tags: tagsArray,
+      };
 
-    if (currentProject._id) {
-      const res = await updateProject(currentProject._id, projectData);
-      if (res.success) {
-        setProjects((prev) =>
-          prev.map((p) => (p._id === currentProject._id ? res.data : p))
-        );
-        showToast("Project updated successfully!");
-        setIsEditingProject(false);
+      if (currentProject._id) {
+        const res = await updateProject(currentProject._id, projectData);
+        if (res.success) {
+          setProjects((prev) =>
+            prev.map((p) => (p._id === currentProject._id ? res.data : p))
+          );
+          showToast("Project updated successfully!");
+          setIsEditingProject(false);
+        } else {
+          showToast(res.error || "Failed to update project.", "error");
+        }
+      } else {
+        const res = await createProject(projectData);
+        if (res.success) {
+          setProjects((prev) => [res.data, ...prev]);
+          showToast("New project added to portfolio!");
+          setIsEditingProject(false);
+        } else {
+          showToast(res.error || "Failed to create project.", "error");
+        }
       }
-    } else {
-      const res = await createProject(projectData);
-      if (res.success) {
-        setProjects((prev) => [res.data, ...prev]);
-        showToast("New project added to portfolio!");
-        setIsEditingProject(false);
-      }
+    } catch {
+      showToast("An unexpected error occurred while saving the project.", "error");
+    } finally {
+      setIsSaving(false);
     }
-    setIsSaving(false);
   };
 
   const handleDeleteProject = async (id: string) => {
-    const res = await deleteProject(id);
-    if (res.success) {
-      setProjects((prev) => prev.filter((p) => p._id !== id));
-      showToast("Portfolio project removed.");
-    } else {
-      showToast("Failed to remove project.", "error");
+    if (!confirm("Are you sure you want to remove this project from the portfolio?")) return;
+    try {
+      const res = await deleteProject(id);
+      if (res.success) {
+        setProjects((prev) => prev.filter((p) => p._id !== id));
+        showToast("Portfolio project removed.");
+      } else {
+        showToast(res.error || "Failed to remove project.", "error");
+      }
+    } catch {
+      showToast("An error occurred while deleting the project.", "error");
     }
   };
 
   // CMS CONTENT SAVERS
   const handleSaveSettings = async () => {
     setIsSaving(true);
-    const res = await updateSiteSettings(content.siteSettings);
-    if (res.success) showToast("Contact info & site settings saved!");
-    setIsSaving(false);
+    try {
+      const res = await updateSiteSettings(content.siteSettings);
+      if (res.success) {
+        showToast("Contact info & site settings saved!");
+      } else {
+        showToast(res.error || "Failed to save settings.", "error");
+      }
+    } catch {
+      showToast("An error occurred while saving settings.", "error");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleSaveHero = async () => {
     setIsSaving(true);
-    const res = await updateHeroContent(content.hero);
-    if (res.success) showToast("Hero section updated!");
-    setIsSaving(false);
+    try {
+      const res = await updateHeroContent(content.hero);
+      if (res.success) {
+        showToast("Hero section updated!");
+      } else {
+        showToast(res.error || "Failed to update hero section.", "error");
+      }
+    } catch {
+      showToast("An error occurred while updating hero section.", "error");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleSaveServices = async () => {
     setIsSaving(true);
-    const res = await updateServicesContent(content.services);
-    if (res.success) showToast("Services updated!");
-    setIsSaving(false);
+    try {
+      const res = await updateServicesContent(content.services);
+      if (res.success) {
+        showToast("Services updated!");
+      } else {
+        showToast(res.error || "Failed to update services.", "error");
+      }
+    } catch {
+      showToast("An error occurred while updating services.", "error");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleSaveWhyUs = async () => {
     setIsSaving(true);
-    const res = await updateWhyUsContent(content.whyUs);
-    if (res.success) showToast("Why Us section updated!");
-    setIsSaving(false);
+    try {
+      const res = await updateWhyUsContent(content.whyUs);
+      if (res.success) {
+        showToast("Why Us section updated!");
+      } else {
+        showToast(res.error || "Failed to update Why Us section.", "error");
+      }
+    } catch {
+      showToast("An error occurred while updating Why Us section.", "error");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleSaveProcess = async () => {
     setIsSaving(true);
-    const res = await updateProcessContent(content.process);
-    if (res.success) showToast("Process steps updated!");
-    setIsSaving(false);
+    try {
+      const res = await updateProcessContent(content.process);
+      if (res.success) {
+        showToast("Process steps updated!");
+      } else {
+        showToast(res.error || "Failed to update process steps.", "error");
+      }
+    } catch {
+      showToast("An error occurred while updating process steps.", "error");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleAddCaseStudy = () => {
@@ -300,6 +390,7 @@ export function AdminDashboard({
   };
 
   const handleDeleteCaseStudy = (idx: number) => {
+    if (!confirm("Are you sure you want to remove this case study?")) return;
     setContent((prev: any) => ({
       ...prev,
       caseStudies: prev.caseStudies.filter((_: any, i: number) => i !== idx),
@@ -309,21 +400,36 @@ export function AdminDashboard({
 
   const handleSaveCaseStudies = async () => {
     setIsSaving(true);
-    const res = await updateCaseStudiesContent(content.caseStudies);
-    if (res.success) showToast("Case studies updated successfully!");
-    setIsSaving(false);
+    try {
+      const res = await updateCaseStudiesContent(content.caseStudies);
+      if (res.success) {
+        showToast("Case studies updated successfully!");
+      } else {
+        showToast(res.error || "Failed to update case studies.", "error");
+      }
+    } catch {
+      showToast("An error occurred while updating case studies.", "error");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleResetDefaults = async () => {
+    if (!confirm("Are you sure you want to reset all CMS content to default settings? This will overwrite customized text.")) return;
     setIsSaving(true);
-    const res = await resetToDefaultContent();
-    if (res.success) {
-      setContent(res.data);
-      showToast("Content reset to default settings.");
-    } else {
-      showToast("Failed to reset content.", "error");
+    try {
+      const res = await resetToDefaultContent();
+      if (res.success) {
+        setContent(res.data);
+        showToast("Content reset to default settings.");
+      } else {
+        showToast(res.error || "Failed to reset content.", "error");
+      }
+    } catch {
+      showToast("An error occurred while resetting content.", "error");
+    } finally {
+      setIsSaving(false);
     }
-    setIsSaving(false);
   };
 
   // LOGIN SCREEN
@@ -349,19 +455,31 @@ export function AdminDashboard({
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
-            <input
-              type="password"
-              placeholder="Enter administrative key..."
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-center"
-              autoFocus
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                required
+                placeholder="Enter administrative key..."
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 pr-11 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-center font-medium"
+                autoFocus
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-md transition-colors"
+                title={showPassword ? "Hide password" : "Show password"}
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
 
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all shadow-md shadow-blue-500/20 disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all shadow-md shadow-blue-500/20 disabled:opacity-50 cursor-pointer"
             >
               {isLoggingIn ? "Authenticating..." : "Sign In Securely"}
             </button>
@@ -936,182 +1054,205 @@ export function AdminDashboard({
             </div>
 
             {/* Project Edit/Create Modal */}
-            {isEditingProject && (
-              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-xl space-y-5">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-                  <h3 className="text-lg font-bold text-slate-900">
-                    {currentProject._id ? "Edit Portfolio Project" : "Add New Project"}
-                  </h3>
-                  <button
+            <AnimatePresence>
+              {isEditingProject && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+                  {/* Backdrop */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
                     onClick={() => setIsEditingProject(false)}
-                    className="text-xs text-slate-500 hover:text-slate-800 font-semibold"
+                  />
+
+                  {/* Modal Dialog Card */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="relative w-full max-w-2xl bg-white border border-slate-200 rounded-3xl shadow-2xl p-6 sm:p-8 space-y-5 my-8 max-h-[90vh] overflow-y-auto z-10"
                   >
-                    Cancel
-                  </button>
-                </div>
-
-                <form onSubmit={handleSaveProject} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Project Title *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={currentProject.title}
-                        onChange={(e) => setCurrentProject({ ...currentProject, title: e.target.value })}
-                        placeholder="e.g. Lumina Mobile Storefront"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Client / Brand Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={currentProject.client}
-                        onChange={(e) => setCurrentProject({ ...currentProject, client: e.target.value })}
-                        placeholder="e.g. Lumina Goods"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Category / Goal *
-                      </label>
-                      <select
-                        value={currentProject.category}
-                        onChange={(e) => setCurrentProject({ ...currentProject, category: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+                      <h3 className="text-lg font-bold text-slate-900">
+                        {currentProject._id ? "Edit Portfolio Project" : "Add New Project"}
+                      </h3>
+                      <button
+                        type="button"
+                        onClick={() => setIsEditingProject(false)}
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                        title="Close (Esc)"
                       >
-                        <option value="All-in-One Digital Growth">All-in-One Digital Growth</option>
-                        <option value="Get More Customer Calls & Inquiries">Get More Customer Calls & Inquiries</option>
-                        <option value="Build a Fast Modern Website">Build a Fast Modern Website</option>
-                        <option value="Save Time with AI Chatbots">Save Time with AI Chatbots</option>
-                        <option value="Reach More People with Social Ads">Reach More People with Social Ads</option>
-                      </select>
+                        <X className="w-5 h-5" />
+                      </button>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Highlight Badge
-                      </label>
-                      <input
-                        type="text"
-                        value={currentProject.highlight}
-                        onChange={(e) => setCurrentProject({ ...currentProject, highlight: e.target.value })}
-                        placeholder="e.g. 70 Hours Saved Weekly"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      />
-                    </div>
+                    <form onSubmit={handleSaveProject} className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">
+                            Project Title *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={currentProject.title}
+                            onChange={(e) => setCurrentProject({ ...currentProject, title: e.target.value })}
+                            placeholder="e.g. Lumina Mobile Storefront"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          />
+                        </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Live Preview URL (Optional)
-                      </label>
-                      <input
-                        type="text"
-                        value={currentProject.liveUrl}
-                        onChange={(e) => setCurrentProject({ ...currentProject, liveUrl: e.target.value })}
-                        placeholder="https://client-demo.com"
-                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      />
-                    </div>
-                  </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">
+                            Client / Brand Name *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={currentProject.client}
+                            onChange={(e) => setCurrentProject({ ...currentProject, client: e.target.value })}
+                            placeholder="e.g. Lumina Goods"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          />
+                        </div>
+                      </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Project Description *
-                    </label>
-                    <textarea
-                      rows={2}
-                      required
-                      value={currentProject.description}
-                      onChange={(e) => setCurrentProject({ ...currentProject, description: e.target.value })}
-                      placeholder="Brief overview of what was built and the result..."
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    />
-                  </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">
+                            Category / Goal *
+                          </label>
+                          <select
+                            value={currentProject.category}
+                            onChange={(e) => setCurrentProject({ ...currentProject, category: e.target.value })}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          >
+                            <option value="All-in-One Digital Growth">All-in-One Digital Growth</option>
+                            <option value="Get More Customer Calls & Inquiries">Get More Customer Calls & Inquiries</option>
+                            <option value="Build a Fast Modern Website">Build a Fast Modern Website</option>
+                            <option value="Save Time with AI Chatbots">Save Time with AI Chatbots</option>
+                            <option value="Reach More People with Social Ads">Reach More People with Social Ads</option>
+                          </select>
+                        </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Tags (Comma separated)
-                    </label>
-                    <input
-                      type="text"
-                      value={Array.isArray(currentProject.tags) ? currentProject.tags.join(", ") : currentProject.tags}
-                      onChange={(e) => setCurrentProject({ ...currentProject, tags: e.target.value })}
-                      placeholder="Next.js, Mobile UX, AI Automation"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    />
-                  </div>
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">
+                            Highlight Badge
+                          </label>
+                          <input
+                            type="text"
+                            value={currentProject.highlight}
+                            onChange={(e) => setCurrentProject({ ...currentProject, highlight: e.target.value })}
+                            placeholder="e.g. 70 Hours Saved Weekly"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          />
+                        </div>
 
-                  {/* Image Upload / URL */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Project Cover Image URL
-                    </label>
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="text"
-                        value={currentProject.image}
-                        onChange={(e) => setCurrentProject({ ...currentProject, image: e.target.value })}
-                        placeholder="https://res.cloudinary.com/... or /images/service_web.jpg"
-                        className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                      />
+                        <div>
+                          <label className="block text-xs font-semibold text-slate-700 mb-1">
+                            Live Preview URL (Optional)
+                          </label>
+                          <input
+                            type="text"
+                            value={currentProject.liveUrl}
+                            onChange={(e) => setCurrentProject({ ...currentProject, liveUrl: e.target.value })}
+                            placeholder="https://client-demo.com"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          />
+                        </div>
+                      </div>
 
-                      <label className="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
-                        <Upload className="w-3.5 h-3.5" />
-                        <span>{uploadingImage ? "Uploading..." : "Upload Image"}</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) =>
-                            handleImageUpload(e, (url) => setCurrentProject((p: any) => ({ ...p, image: url })))
-                          }
-                        />
-                      </label>
-                    </div>
-
-                    {currentProject.image && (
-                      <div className="mt-3 relative w-full h-40 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={currentProject.image}
-                          alt="Project Preview"
-                          className="w-full h-full object-cover"
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
+                          Project Description *
+                        </label>
+                        <textarea
+                          rows={2}
+                          required
+                          value={currentProject.description}
+                          onChange={(e) => setCurrentProject({ ...currentProject, description: e.target.value })}
+                          placeholder="Brief overview of what was built and the result..."
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
                       </div>
-                    )}
-                  </div>
 
-                  <div className="flex justify-end gap-3 pt-3 border-t border-slate-200">
-                    <button
-                      type="button"
-                      onClick={() => setIsEditingProject(false)}
-                      className="px-4 py-2 rounded-xl text-xs text-slate-500 hover:text-slate-800 font-semibold"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={isSaving}
-                      className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs"
-                    >
-                      {isSaving ? "Saving..." : "Save Project"}
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
+                          Tags (Comma separated)
+                        </label>
+                        <input
+                          type="text"
+                          value={Array.isArray(currentProject.tags) ? currentProject.tags.join(", ") : currentProject.tags}
+                          onChange={(e) => setCurrentProject({ ...currentProject, tags: e.target.value })}
+                          placeholder="Next.js, Mobile UX, AI Automation"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        />
+                      </div>
+
+                      {/* Image Upload / URL */}
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">
+                          Project Cover Image URL
+                        </label>
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="text"
+                            value={currentProject.image}
+                            onChange={(e) => setCurrentProject({ ...currentProject, image: e.target.value })}
+                            placeholder="https://res.cloudinary.com/... or /images/service_web.jpg"
+                            className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          />
+
+                          <label className="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
+                            <Upload className="w-3.5 h-3.5" />
+                            <span>{uploadingImage ? "Uploading..." : "Upload Image"}</span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) =>
+                                handleImageUpload(e, (url) => setCurrentProject((p: any) => ({ ...p, image: url })))
+                              }
+                            />
+                          </label>
+                        </div>
+
+                        {currentProject.image && (
+                          <div className="mt-3 relative w-full h-40 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={currentProject.image}
+                              alt="Project Preview"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="flex justify-end gap-3 pt-3 border-t border-slate-200">
+                        <button
+                          type="button"
+                          onClick={() => setIsEditingProject(false)}
+                          className="px-4 py-2 rounded-xl text-xs text-slate-500 hover:text-slate-800 font-semibold cursor-pointer"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={isSaving}
+                          className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs text-xs cursor-pointer"
+                        >
+                          {isSaving ? "Saving..." : "Save Project"}
+                        </button>
+                      </div>
+                    </form>
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
 
             {/* Projects List */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

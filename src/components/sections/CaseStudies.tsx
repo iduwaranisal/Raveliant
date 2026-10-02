@@ -139,6 +139,7 @@ export function CaseStudies({
               <div className="lg:col-span-6 space-y-4">
                 <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs group">
                   <Image
+                    key={currentStudy.image || activeTab}
                     src={currentStudy.image || "/images/case_aurapay.svg"}
                     alt={`${currentStudy.client || "Client"} Success Story - ${currentStudy.tag || "Case Study"} | Raveliant Digital Solutions`}
                     fill

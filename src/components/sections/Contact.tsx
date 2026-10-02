@@ -52,11 +52,47 @@ export function Contact({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setErrorMessage("");
 
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPhone = formData.phone.trim();
+    const trimmedBusinessUrl = formData.businessUrl.trim();
+
+    if (!trimmedName || !trimmedEmail || !trimmedPhone || !trimmedBusinessUrl) {
+      const msg = "Please fill out all required fields (*).";
+      setErrorMessage(msg);
+      showToast(msg, "error");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) {
+      const msg = "Please enter a valid email address.";
+      setErrorMessage(msg);
+      showToast(msg, "error");
+      return;
+    }
+
+    if (trimmedPhone.length < 7) {
+      const msg = "Please enter a valid contact phone number.";
+      setErrorMessage(msg);
+      showToast(msg, "error");
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
-      const result = await submitContactForm(formData);
+      const result = await submitContactForm({
+        ...formData,
+        name: trimmedName,
+        email: trimmedEmail,
+        phone: trimmedPhone,
+        whatsapp: formData.whatsapp.trim(),
+        businessUrl: trimmedBusinessUrl,
+        message: formData.message.trim(),
+      });
 
       if (result.success) {
         setSubmitted(true);
