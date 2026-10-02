@@ -1221,12 +1221,12 @@ export function AdminDashboard({
                         </div>
 
                         {currentProject.image && (
-                          <div className="mt-3 relative w-full h-44 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                          <div className="mt-3 relative w-full h-44 rounded-xl overflow-hidden border border-slate-200 bg-slate-900/5 flex items-center justify-center p-1.5">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={currentProject.image}
                               alt="Project Preview"
-                              className="w-full h-full object-cover object-top"
+                              className="w-full h-full object-contain"
                             />
                           </div>
                         )}
@@ -1274,12 +1274,12 @@ export function AdminDashboard({
                       )}
                     </div>
 
-                    <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 mb-4 bg-slate-100">
+                    <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 mb-4 bg-slate-900/5 flex items-center justify-center p-1.5">
                       <Image
                         src={proj.image || "/images/service_web.jpg"}
                         alt={proj.title}
                         fill
-                        className="object-cover object-top"
+                        className="object-contain p-1"
                       />
                     </div>
 

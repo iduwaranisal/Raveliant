@@ -59,13 +59,13 @@ function ProjectCard({ project, idx }: { project: ProjectItem; idx: number }) {
           )}
         </div>
 
-        {/* Image Container: Clean browser-like aspect ratio with object-top alignment */}
-        <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100 mb-4 shadow-2xs group/img">
+        {/* Full Image Showcase Container (100% complete image visible, zero cropping) */}
+        <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-900/5 mb-4 shadow-2xs group/img flex items-center justify-center p-1.5">
           <Image
             src={imgSrc}
             alt={`${project.title} - ${project.category} | Raveliant Digital Solutions`}
             fill
-            className="object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+            className="object-contain p-1 transition-transform duration-500 group-hover/img:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => setImgSrc("/images/service_web.jpg")}
           />
