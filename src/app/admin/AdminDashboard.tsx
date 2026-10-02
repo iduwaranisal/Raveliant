@@ -1221,12 +1221,12 @@ export function AdminDashboard({
                         </div>
 
                         {currentProject.image && (
-                          <div className="mt-3 relative w-full h-40 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                          <div className="mt-3 relative w-full h-44 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={currentProject.image}
                               alt="Project Preview"
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover object-top"
                             />
                           </div>
                         )}
@@ -1262,20 +1262,29 @@ export function AdminDashboard({
                   className="rounded-2xl p-5 bg-white border border-slate-200 shadow-xs flex flex-col justify-between"
                 >
                   <div>
-                    <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-slate-200 mb-4 bg-slate-100">
+                    {/* Top Badges */}
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="bg-blue-50 text-blue-700 border border-blue-200/80 px-2.5 py-1 rounded-md text-[10px] font-bold truncate">
+                        {proj.category}
+                      </span>
+                      {proj.highlight && (
+                        <span className="bg-emerald-50 text-emerald-700 border border-emerald-200/80 px-2 py-0.5 rounded-md text-[10px] font-bold shrink-0">
+                          ★ {proj.highlight}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 mb-4 bg-slate-100">
                       <Image
                         src={proj.image || "/images/service_web.jpg"}
                         alt={proj.title}
                         fill
-                        className="object-cover"
+                        className="object-cover object-top"
                       />
-                      <div className="absolute top-2 left-2 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-md text-[10px] font-bold text-blue-700 border border-slate-200/80 shadow-xs">
-                        {proj.category}
-                      </div>
                     </div>
 
                     <div className="text-[11px] text-slate-500 uppercase tracking-wider">{proj.client}</div>
-                    <h4 className="text-base font-bold text-slate-900 mt-0.5">{proj.title}</h4>
+                    <h4 className="text-base font-bold text-slate-900 mt-0.5 leading-snug">{proj.title}</h4>
                     <p className="text-xs text-slate-600 mt-1 line-clamp-2">{proj.description}</p>
                   </div>
 

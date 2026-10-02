@@ -47,26 +47,28 @@ function ProjectCard({ project, idx }: { project: ProjectItem; idx: number }) {
       className="rounded-2xl p-5 sm:p-6 bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between shadow-xs group"
     >
       <div>
-        {/* Image Container with subtle zoom */}
-        <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100 mb-4">
+        {/* Top Header Row: Category & Highlight Badges (Keeps screenshot 100% visible) */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200/80 truncate shadow-2xs">
+            {project.category}
+          </span>
+          {project.highlight && (
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shrink-0 shadow-2xs">
+              ★ {project.highlight}
+            </span>
+          )}
+        </div>
+
+        {/* Image Container: Clean browser-like aspect ratio with object-top alignment */}
+        <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100 mb-4 shadow-2xs group/img">
           <Image
             src={imgSrc}
             alt={`${project.title} - ${project.category} | Raveliant Digital Solutions`}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => setImgSrc("/images/service_web.jpg")}
           />
-
-          {/* Top Badge */}
-          <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md border border-slate-200 px-2.5 py-0.5 rounded-md text-[11px] font-bold text-blue-700 max-w-[85%] truncate shadow-xs">
-            {project.category}
-          </div>
-
-          {project.highlight && (
-            <div className="absolute bottom-2.5 left-2.5 bg-blue-600 px-2.5 py-0.5 rounded-md text-[10px] font-bold text-white shadow-xs">
-              ★ {project.highlight}
-            </div>
-          )}
         </div>
 
         {/* Client & Title */}
