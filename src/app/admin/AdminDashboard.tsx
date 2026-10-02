@@ -1063,6 +1063,7 @@ export function AdminDashboard({
                         type="text"
                         value={currentProject.image}
                         onChange={(e) => setCurrentProject({ ...currentProject, image: e.target.value })}
+                        placeholder="https://res.cloudinary.com/... or /images/service_web.jpg"
                         className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                       />
 
@@ -1079,6 +1080,17 @@ export function AdminDashboard({
                         />
                       </label>
                     </div>
+
+                    {currentProject.image && (
+                      <div className="mt-3 relative w-full h-40 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={currentProject.image}
+                          alt="Project Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex justify-end gap-3 pt-3 border-t border-slate-200">
@@ -1232,6 +1244,7 @@ export function AdminDashboard({
                   type="text"
                   value={content.hero?.showcaseImage || ""}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, showcaseImage: e.target.value } })}
+                  placeholder="https://res.cloudinary.com/... or /images/hero.jpg"
                   className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
                 <label className="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all">
@@ -1249,6 +1262,16 @@ export function AdminDashboard({
                   />
                 </label>
               </div>
+              {content.hero?.showcaseImage && (
+                <div className="mt-3 relative w-full max-w-sm h-36 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={content.hero.showcaseImage}
+                    alt="Hero Showcase Preview"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -1626,6 +1649,16 @@ export function AdminDashboard({
                         />
                       </label>
                     </div>
+                    {cs.image && (
+                      <div className="mt-2.5 relative w-full max-w-sm h-32 rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={cs.image}
+                          alt="Case Study Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div>
