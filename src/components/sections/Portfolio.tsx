@@ -47,35 +47,35 @@ function ProjectCard({ project, idx }: { project: ProjectItem; idx: number }) {
       className="rounded-2xl p-5 sm:p-6 bg-white border border-slate-200 hover:border-blue-300 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between shadow-xs group"
     >
       <div>
-        {/* Top Header Row: Category & Highlight Badges (Keeps screenshot 100% visible) */}
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200/80 truncate shadow-2xs">
-            {project.category}
-          </span>
-          {project.highlight && (
-            <span className="px-2.5 py-1 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shrink-0 shadow-2xs">
-              ★ {project.highlight}
-            </span>
-          )}
-        </div>
-
-        {/* Full Image Showcase Container (100% complete image visible, zero cropping) */}
-        <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-900/5 mb-4 shadow-2xs group/img flex items-center justify-center p-1.5">
+        {/* Clean Edge-to-Edge Image Showcase Container with object-top alignment */}
+        <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200/90 bg-slate-100 mb-4 shadow-xs">
           <Image
             src={imgSrc}
             alt={`${project.title} - ${project.category} | Raveliant Digital Solutions`}
             fill
-            className="object-contain p-1 transition-transform duration-500 group-hover/img:scale-105"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => setImgSrc("/images/service_web.jpg")}
           />
         </div>
 
+        {/* Category & Highlight Metadata Row */}
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <span className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200/70 truncate">
+            {project.category}
+          </span>
+          {project.highlight && (
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/70 shrink-0">
+              ★ {project.highlight}
+            </span>
+          )}
+        </div>
+
         {/* Client & Title */}
-        <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+        <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
           {project.client}
         </div>
-        <h3 className="text-lg font-bold text-slate-900 mb-1.5 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors leading-snug">
           {project.title}
         </h3>
 
